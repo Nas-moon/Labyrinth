@@ -1,24 +1,34 @@
+// Total questions
 const totalQuestions = 200;
 const perPage = 10;
 const totalPages = totalQuestions / perPage;
 let currentPage = 1;
 
-// Example correct answers (for demo)
-let correctAnswers = Array(totalQuestions).fill("ans"); 
-// Later we’ll replace this with a backend fetch
+// For testing: correct answers = just "1", "2", "3" ...
+// You can later replace this with real correct answers (or fetch from backend)
+let correctAnswers = [];
+for (let i = 1; i <= totalQuestions; i++) {
+  correctAnswers.push(i.toString());
+}
 
+// Render questions for current page
 function renderQuestions() {
   const container = document.getElementById("questionContainer");
   container.innerHTML = "";
-  let start = (currentPage-1)*perPage + 1;
+  
+  let start = (currentPage - 1) * perPage + 1;
   let end = start + perPage - 1;
-  if(end > totalQuestions) end = totalQuestions;
+  if (end > totalQuestions) end = totalQuestions;
 
   let div = document.createElement("div");
-  div.classList.add("inputs","active");
+  div.classList.add("inputs", "active");
 
-  for(let i=start;i<=end;i++){
-    div.innerHTML += `<div class="input-row">${i}. <input type="text" id="q${i}" /></div>`;
+  for (let i = start; i <= end; i++) {
+    div.innerHTML += `
+      <div class="input-row">
+        ${i}. <input type="text" id="q${i}" />
+      </div>
+    `;
   }
   container.appendChild(div);
 
@@ -28,37 +38,45 @@ function renderQuestions() {
   document.getElementById("submitBtn").style.display = (currentPage === totalPages) ? "inline-block" : "none";
 }
 
-function nextPage(){
-  if(currentPage < totalPages){
+// Go to next page
+function nextPage() {
+  if (currentPage < totalPages) {
     currentPage++;
     renderQuestions();
   }
 }
-function prevPage(){
-  if(currentPage > 1){
+
+// Go to previous page
+function prevPage() {
+  if (currentPage > 1) {
     currentPage--;
     renderQuestions();
   }
 }
 
-function submitAnswers(){
+// Submit answers
+function submitAnswers() {
   let wrong = 0;
-  for(let i=1;i<=totalQuestions;i++){
-    let val = document.getElementById("q"+i).value.trim();
-    if(val !== correctAnswers[i-1]){
+
+  for (let i = 1; i <= totalQuestions; i++) {
+    let val = document.getElementById("q" + i).value.trim();
+    if (val !== correctAnswers[i - 1]) {
       wrong++;
     }
   }
+
   let team = document.getElementById("team").value;
-  if(!team){
+  if (!team) {
     alert("Please select a team!");
     return;
   }
-  document.getElementById("result").innerText = `You got ${wrong} wrong!`;
 
-  // Add to log
+  // Always show result clearly
+  document.getElementById("result").innerText = `❌ You got ${wrong} errors out of ${totalQuestions} questions.`;
+
+  // Add entry to log
   let now = new Date().toLocaleString();
-  document.getElementById("log").innerHTML += `${team} submitted at ${now} → Wrong: ${wrong}<br>`;
+  document.getElementById("log").innerHTML += `${team} submitted at ${now} → Errors: ${wrong}<br>`;
 }
 
 // Initial render
