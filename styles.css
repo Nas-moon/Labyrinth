@@ -10,6 +10,11 @@ body {
   text-align: center;
 }
 
+h1{
+  font-size: 30px;
+  font-weight: 400;
+}
+
 ul {
   display: flex;
   justify-content: flex-end;
