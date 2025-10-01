@@ -10,6 +10,9 @@ for (let i = 1; i <= totalQuestions; i++) {
   correctAnswers.push(i.toString());
 }
 
+// Store user answers
+let userAnswers = Array(totalQuestions).fill("");
+
 // Render questions for current page
 function renderQuestions() {
   const container = document.getElementById("questionContainer");
@@ -25,7 +28,8 @@ function renderQuestions() {
   for (let i = start; i <= end; i++) {
     div.innerHTML += `
       <div class="input-row">
-        ${i}. <input type="text" id="q${i}" required />
+        ${i}. <input type="text" id="q${i}" value="${userAnswers[i-1] || ""}" 
+        oninput="saveAnswer(${i}, this.value)" />
       </div>
     `;
   }
@@ -35,6 +39,11 @@ function renderQuestions() {
   document.getElementById("prevBtn").style.display = (currentPage === 1) ? "none" : "inline-block";
   document.getElementById("nextBtn").style.display = (currentPage === totalPages) ? "none" : "inline-block";
   document.getElementById("submitBtn").style.display = (currentPage === totalPages) ? "inline-block" : "none";
+}
+
+// Save answer when typing
+function saveAnswer(index, value) {
+  userAnswers[index - 1] = value.trim();
 }
 
 // Navigation
@@ -62,9 +71,8 @@ function submitAnswers(event) {
   }
 
   // Check if all inputs are filled
-  for (let i = 1; i <= totalQuestions; i++) {
-    let val = document.getElementById("q" + i).value.trim();
-    if (val === "") {
+  for (let i = 0; i < totalQuestions; i++) {
+    if (userAnswers[i] === "") {
       alert("⚠️ Please fill all questions before submitting!");
       return;
     }
@@ -72,9 +80,8 @@ function submitAnswers(event) {
 
   // Count wrong answers
   let wrong = 0;
-  for (let i = 1; i <= totalQuestions; i++) {
-    let val = document.getElementById("q" + i).value.trim();
-    if (val !== correctAnswers[i - 1]) {
+  for (let i = 0; i < totalQuestions; i++) {
+    if (userAnswers[i] !== correctAnswers[i]) {
       wrong++;
     }
   }
