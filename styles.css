@@ -10,6 +10,10 @@ h1,h2,h3 {
   text-align: center;
 }
 
+ul {
+  display:flex;
+  justify-content: spaces-evenly;
+}
 p {
   font-color:#EAEAEA;
   font-size: 16px;
