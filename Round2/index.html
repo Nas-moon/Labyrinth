@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Round 2 Errorr..!</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Logo -->
+  <img src="your-logo.png" alt="Logo" class="logo">
+
+  <!-- Heading -->
+  <header>
+    <h1>Round 2 Errorr..!</h1>
+    <p>Input the right values to pass this round!</p>
+  </header>
+
+  <div class="container">
+    <!-- Team Dropdown -->
+    <label for="team">Select Your Team: </label>
+    <select id="team">
+      <option value="">--Choose Team--</option>
+      <script>
+        for(let i=1;i<=20;i++){
+          document.write(`<option value="Team ${i}">Team ${i}</option>`);
+        }
+      </script>
+    </select>
+
+    <!-- Input Sections -->
+    <div id="questionContainer"></div>
+
+    <!-- Navigation -->
+    <div>
+      <button id="prevBtn" onclick="prevPage()">Previous</button>
+      <button id="nextBtn" onclick="nextPage()">Next</button>
+      <button id="submitBtn" onclick="submitAnswers()" style="display:none;">Submit</button>
+    </div>
+
+    <!-- Result -->
+    <div id="result"></div>
+
+    <!-- Log -->
+    <div id="log"><b>Submission Log:</b><br></div>
+  </div>
+
+<script src="script.js"></script>
+</body>
+</html>
