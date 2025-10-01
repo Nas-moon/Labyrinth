@@ -1,7 +1,10 @@
 body {
-  background-color: gradient(#0A0A0F 50%,#12121A 100%);
-  border: 2px solid #00FF66;
+  background: linear-gradient(135deg, #0A0A0F, #0D0D13, #12121A);
 } 
+
+html {
+  border: 2px solid #00FF66;
+}
 
 .text {
   color:#00FF66;
