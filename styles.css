@@ -12,7 +12,8 @@ h1,h2,h3 {
 
 ul {
   display:flex;
-  justify-content: spaces-evenly;
+  justify-content: spaces-between;
+  align-items:flex-end;
 }
 p {
   font-color:#00FF66;
@@ -22,8 +23,8 @@ p {
 
 #logo {
   position: absolute;
-  top: 15px;
-  left: 15px;
-  width: 75px;
+  top: 20px;
+  left: 20px;
+  width: 70px;
   height: auto;
 }
