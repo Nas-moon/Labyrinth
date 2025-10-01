@@ -1,6 +1,9 @@
 body {
   background: linear-gradient(135deg, #0A0A0F, #0D0D13, #12121A);
-} 
+  min-height: 100vh;
+  margin: 0;
+}
+
 
 html {
   border: 2px solid #00FF66;
