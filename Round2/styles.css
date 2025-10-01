@@ -1,0 +1,89 @@
+body {
+  margin: 0;
+  font-family: 'Trebuchet MS', sans-serif;
+  background: #0b0c10;
+  color: #fff;
+  text-align: center;
+  background-image: radial-gradient(circle, #1f2833 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+header {
+  padding: 20px;
+}
+header h1 {
+  font-size: 2.5rem;
+  color: #66fcf1;
+  text-shadow: 0 0 10px #45a29e;
+}
+header p {
+  font-size: 1.2rem;
+  color: #c5c6c7;
+}
+.logo {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  width: 60px;
+  height: auto;
+}
+.container {
+  margin-top: 40px;
+}
+select {
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+.inputs {
+  display: none;
+}
+.inputs.active {
+  display: block;
+}
+.input-row {
+  margin: 10px;
+}
+input[type="text"] {
+  padding: 8px;
+  width: 200px;
+  border-radius: 6px;
+  border: none;
+  outline: none;
+  text-align: center;
+  box-shadow: 0 0 5px #45a29e;
+  background: #1f2833;
+  color: white;
+}
+button {
+  padding: 10px 20px;
+  margin: 15px;
+  border: none;
+  border-radius: 8px;
+  background: #45a29e;
+  color: #0b0c10;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s;
+}
+button:hover {
+  background: #66fcf1;
+}
+#result {
+  margin-top: 20px;
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #ff5555;
+}
+#log {
+  margin-top: 30px;
+  padding: 10px;
+  background: #1f2833;
+  border-radius: 8px;
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
+  font-size: 0.9rem;
+  color: #aaa;
+}
