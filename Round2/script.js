@@ -4,8 +4,7 @@ const perPage = 10;
 const totalPages = totalQuestions / perPage;
 let currentPage = 1;
 
-// For testing: correct answers = just "1", "2", "3" ...
-// You can later replace this with real correct answers (or fetch from backend)
+// Demo correct answers: "1", "2", "3"... until 200
 let correctAnswers = [];
 for (let i = 1; i <= totalQuestions; i++) {
   correctAnswers.push(i.toString());
@@ -15,7 +14,7 @@ for (let i = 1; i <= totalQuestions; i++) {
 function renderQuestions() {
   const container = document.getElementById("questionContainer");
   container.innerHTML = "";
-  
+
   let start = (currentPage - 1) * perPage + 1;
   let end = start + perPage - 1;
   if (end > totalQuestions) end = totalQuestions;
@@ -26,27 +25,25 @@ function renderQuestions() {
   for (let i = start; i <= end; i++) {
     div.innerHTML += `
       <div class="input-row">
-        ${i}. <input type="text" id="q${i}" />
+        ${i}. <input type="text" id="q${i}" required />
       </div>
     `;
   }
   container.appendChild(div);
 
-  // Show/hide buttons
+  // Show/hide navigation buttons
   document.getElementById("prevBtn").style.display = (currentPage === 1) ? "none" : "inline-block";
   document.getElementById("nextBtn").style.display = (currentPage === totalPages) ? "none" : "inline-block";
   document.getElementById("submitBtn").style.display = (currentPage === totalPages) ? "inline-block" : "none";
 }
 
-// Go to next page
+// Navigation
 function nextPage() {
   if (currentPage < totalPages) {
     currentPage++;
     renderQuestions();
   }
 }
-
-// Go to previous page
 function prevPage() {
   if (currentPage > 1) {
     currentPage--;
@@ -55,15 +52,8 @@ function prevPage() {
 }
 
 // Submit answers
-function submitAnswers() {
-  let wrong = 0;
-
-  for (let i = 1; i <= totalQuestions; i++) {
-    let val = document.getElementById("q" + i).value.trim();
-    if (val !== correctAnswers[i - 1]) {
-      wrong++;
-    }
-  }
+function submitAnswers(event) {
+  if (event) event.preventDefault(); // prevent page refresh
 
   let team = document.getElementById("team").value;
   if (!team) {
@@ -71,8 +61,27 @@ function submitAnswers() {
     return;
   }
 
-  // Always show result clearly
-  document.getElementById("result").innerText = `❌ You got ${wrong} errors out of ${totalQuestions} questions.`;
+  // Check if all inputs are filled
+  for (let i = 1; i <= totalQuestions; i++) {
+    let val = document.getElementById("q" + i).value.trim();
+    if (val === "") {
+      alert("⚠️ Please fill all questions before submitting!");
+      return;
+    }
+  }
+
+  // Count wrong answers
+  let wrong = 0;
+  for (let i = 1; i <= totalQuestions; i++) {
+    let val = document.getElementById("q" + i).value.trim();
+    if (val !== correctAnswers[i - 1]) {
+      wrong++;
+    }
+  }
+
+  // Show result
+  document.getElementById("result").innerText =
+    `✅ Submission received!\nYou got ${wrong} errors out of ${totalQuestions}.`;
 
   // Add entry to log
   let now = new Date().toLocaleString();
