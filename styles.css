@@ -1,76 +1,194 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Labyrinth</title>
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-  <!-- Header -->
-  <header>
-    <div class="header-left">
-      <img src="laby2.o.svg" alt="logo" id="logo">
-      <h1 class="apple">LABYRINTH</h1>
-    </div>
-    <nav>
-      <ul class="nav-links">
-        <li><a href="about.html">About</a></li>
-        <li><a href="map.html">Map</a></li>
-        <li><a href="gallery.html">Gallery</a></li>
-      </ul>
-      <button class="hamburger" aria-label="Open navigation">
-        <span></span><span></span><span></span>
-      </button>
-    </nav>
-  </header>
+/* Reset */
+body, ul, li, h1, h2, p { margin: 0; padding: 0; }
+body {
+  background: linear-gradient(135deg, #0A0A0F, #0D0D13, #12121A);
+  min-height: 100vh;
+  font-family: monospace;
+  color: #03F091;
+  overflow-x: hidden;
+}
 
-  <!-- Layout -->
-  <div class="main-layout">
-    <!-- Left -->
-    <aside>
-      <h2>🏅 Leaderboard</h2>
-      <ul id="leaderboard"><li>Loading...</li></ul>
-    </aside>
+/* Particles full background */
+#particles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+}
 
-    <!-- Center -->
-    <main>
-      <div class="logo-container">
-        <img src="laby2.o.svg" alt="center logo" id="center-logo">
-      </div>
+/* Header */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 25px;
+  border-bottom: 1px solid rgba(3,240,145,0.3);
+}
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+#logo {
+  height: 38px; /* smaller */
+  width: auto;
+}
+.apple {
+  font-size: 24px;
+  color: #03F091;
+}
+.nav-links {
+  display: flex;
+  gap: 18px;
+  list-style: none;
+}
+.nav-links li a {
+  color: #03F091;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 15px;
+}
 
-      <section class="timeline">
-        <div class="timeline-item">🔵 Round 1</div>
-        <div class="timeline-item">🔵 Round 2</div>
-        <div class="timeline-item">🔵 Round 3</div>
-        <div class="timeline-item">🔵 Round 4</div>
-        <div class="timeline-item">🔵 Round 5</div>
-        <div class="timeline-item finale">🏆 Finale</div>
-      </section>
+/* Main layout (desktop) */
+.main-layout {
+  display: grid;
+  grid-template-columns: 260px 1fr 260px;
+  gap: 30px;
+  max-width: 1200px;
+  margin: 30px auto;
+  align-items: start;
+}
 
-      <div class="start-btn-container">
-        <a href="start.html" class="start-btn">🚀 Start</a>
-      </div>
-    </main>
+/* Left Sidebar */
+aside {
+  background: rgba(10, 10, 15, 0.9);
+  border: 2px solid #03F091;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(3,240,145,0.6);
+  padding: 15px;
+}
+#leaderboard {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+#leaderboard li {
+  margin: 8px 0;
+  padding: 6px 10px;
+  border-radius: 5px;
+  font-size: 15px;
+  color: #03F091;
+  background: rgba(3,240,145,0.1);
+  box-shadow: inset 0 0 8px rgba(3,240,145,0.4);
+}
 
-    <!-- Right (Insights + Timer) -->
-    <section class="side right">
-      <div class="insights">
-        <h2>📊 Insights</h2>
-        <p>🔥 Avg. solve time: 12 mins</p>
-        <p>⚡ Fastest solve: 6 mins</p>
-        <p>🚀 Participation: 87%</p>
-      </div>
-    </section>
-  </div>
+/* Right Sidebar */
+.side.right {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background: rgba(10,10,15,0.9);
+  border: 2px solid #03F091;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(3,240,145,0.6);
+  padding: 20px;
+}
 
-  <!-- Fixed Timer Bottom-Right -->
-  <div id="timer-container">
-    ⏱️ Timer: <span id="timer">00:00</span>
-  </div>
+/* Center Area */
+main {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+#center-logo {
+  width: 160px;
+  margin: 0 auto;
+}
 
-  <!-- Particles Background -->
-  <canvas id="particles"></canvas>
-  <script src="script.js"></script>
-</body>
-</html>
+/* Timeline */
+.timeline {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+.timeline-item {
+  min-width: 100px;
+  padding: 10px;
+  border-radius: 6px;
+  font-weight: bold;
+  background: rgba(3,240,145,0.1);
+  border: 1px solid #03F091;
+  box-shadow: 0 0 10px rgba(3,240,145,0.5);
+  color: #03F091;
+  text-align: center;
+  transition: 0.3s ease;
+}
+.timeline-item:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 18px rgba(3,240,145,0.9);
+}
+/* Finale Special */
+.timeline-item.finale {
+  background: rgba(255, 20, 120, 0.15);
+  border: 1px solid #ff1e7c;
+  color: #ff5fa3;
+  box-shadow: 0 0 14px rgba(255, 61, 150, 0.9), 
+              0 0 28px rgba(255, 61, 150, 0.5);
+}
+.timeline-item.finale:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(255, 61, 150, 1),
+              0 0 36px rgba(255, 20, 120, 0.7);
+}
+
+/* Start Button */
+.start-btn {
+  padding: 15px 40px;
+  border-radius: 50px;
+  background: linear-gradient(90deg,#03F091 0%,#00ff99 100%);
+  color: #0A0A0F;
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 0 20px rgba(3,240,145,0.7);
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+.start-btn:hover {
+  background: linear-gradient(90deg,#00ffaa 0%,#03F091 100%);
+  box-shadow: 0 0 30px rgba(0,255,153,0.9);
+  transform: scale(1.05);
+}
+
+/* Timer (fixed bottom-right) */
+#timer-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: rgba(10, 10, 15, 0.9);
+  border: 2px solid #03F091;
+  border-radius: 10px;
+  padding: 10px 15px;
+  box-shadow: 0 0 12px rgba(3,240,145,0.6);
+  font-weight: bold;
+}
+
+/* Responsive: Mobile */
+@media (max-width: 900px) {
+  .main-layout {
+    grid-template-columns: 1fr;
+  }
+  aside, main, .side.right {
+    max-width: 500px;
+    margin: 0 auto;
+  }
+  .timeline {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
