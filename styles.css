@@ -3,6 +3,8 @@ body, ul, li, h1, h2, p {
   margin: 0;
   padding: 0;
 }
+
+/* Body */
 body {
   background: linear-gradient(135deg, #0A0A0F, #0D0D13, #12121A);
   min-height: 100vh;
@@ -11,44 +13,57 @@ body {
   overflow-x: hidden;
 }
 
-/* ======================
-   Header + Navigation
-====================== */
+/* Header */
 header {
-  display: grid;
-  grid-template-columns: 1fr auto 1fr; /* logo | title | nav */
+  display: flex;
+  justify-content: space-between;
   align-items: center;
-  padding: 10px 20px;
+  padding: 10px 15px;
   border-radius: 8px;
   border: 2px solid #03F091;
   position: relative;
 }
 
 #logo {
-  width: 60px;
+  width: 45px;
   height: auto;
 }
 
 .apple {
-  text-align: center;
-  font-size: 40px;
+  font-size: 28px;
   font-weight: 800;
   font-family: monospace;
   color: #03F091;
   margin: 0;
+  text-align: center;
+  flex-grow: 1;
 }
 
-/* Desktop nav */
+/* Hamburger */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  cursor: pointer;
+}
+
+.hamburger div {
+  width: 25px;
+  height: 3px;
+  background: #03F091;
+  border-radius: 2px;
+}
+
+/* Desktop Nav */
 nav ul {
   display: flex;
-  justify-content: flex-end;
   gap: 30px;
   list-style: none;
 }
 
 .orange a {
   font-size: 20px;
-  font-family: monospace;
   font-weight: 600;
   color: #03F091;
   text-decoration: none;
@@ -57,26 +72,7 @@ nav ul {
   color: #FFFFFF;
 }
 
-/* Hamburger (hidden by default) */
-.hamburger {
-  display: none;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 25px;
-  height: 20px;
-  cursor: pointer;
-}
-.hamburger span {
-  display: block;
-  height: 3px;
-  background: #03F091;
-  border-radius: 5px;
-}
-
-/* Mobile nav (hidden initially) */
-nav {
-  position: relative;
-}
+/* Mobile Nav */
 nav ul.mobile-nav {
   display: none;
   flex-direction: column;
@@ -86,17 +82,17 @@ nav ul.mobile-nav {
   padding: 15px;
   gap: 15px;
   position: absolute;
-  top: 50px;
-  right: 0;
+  top: 60px;
+  right: 10px;
   z-index: 1000;
+  min-width: 150px;
 }
+
 nav ul.mobile-nav.show {
   display: flex;
 }
 
-/* ======================
-   Center Logo + Particles
-====================== */
+/* Center Logo */
 #center-logo {
   width: 200px;
   max-width: 30%;
@@ -105,6 +101,7 @@ nav ul.mobile-nav.show {
   margin: 20px auto;
 }
 
+/* Logo SVG */
 .logo-svg {
   width: 280px;
   filter: drop-shadow(0 0 20px #00ff66) drop-shadow(0 0 60px #00ff99);
@@ -130,9 +127,7 @@ canvas#particles {
   z-index: 1;
 }
 
-/* ======================
-   Timeline
-====================== */
+/* Timeline */
 .timeline {
   display: flex;
   justify-content: center;
@@ -155,23 +150,25 @@ canvas#particles {
   color: #ff0077;
 }
 
-/* ======================
-   Start Button
-====================== */
+/* Start Button */
 .start-btn-container {
   text-align: center;
   margin: 30px;
 }
 .start-btn {
+  display: inline-block;
+  white-space: nowrap;
   padding: 15px 40px;
   border: 2px solid #03F091;
   border-radius: 50px;
   background: transparent;
   color: #03F091;
-  font-size: 24px;
+  font-size: 20px;
   text-decoration: none;
   box-shadow: 0 0 20px #03F091, inset 0 0 10px #03F091;
   transition: all 0.3s ease;
+  max-width: 90%;
+  text-align: center;
 }
 .start-btn:hover {
   background: #03F091;
@@ -179,9 +176,7 @@ canvas#particles {
   box-shadow: 0 0 40px #03F091;
 }
 
-/* ======================
-   Side Sections + Leaderboard
-====================== */
+/* Side Sections */
 .side {
   position: absolute;
   top: 200px;
@@ -193,6 +188,19 @@ canvas#particles {
 }
 .side.left { left: 30px; }
 .side.right { right: 30px; }
+
+/* Timer */
+#timer-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  font-size: 22px;
+  border: 2px solid #03F091;
+  border-radius: 8px;
+  padding: 10px;
+  background: #0A0A0F;
+  box-shadow: 0 0 10px #03F091;
+}
 
 /* Leaderboard container */
 aside {
@@ -227,83 +235,32 @@ aside h2 {
   padding: 6px 10px;
   font-size: 16px;
   border-bottom: 1px solid rgba(3, 240, 145, 0.3);
-  font-weight: bold;
 }
 #leaderboard li:last-child {
   border-bottom: none;
 }
 
-/* ======================
-   Timer
-====================== */
-#timer-container {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  font-size: 22px;
-  border: 2px solid #03F091;
-  border-radius: 8px;
-  padding: 10px;
-  background: #0A0A0F;
-  box-shadow: 0 0 10px #03F091;
-}
-
-/* ======================
-   📱 Mobile Styles
-====================== */
+/* Mobile Responsive */
 @media (max-width: 768px) {
-  header {
-    grid-template-columns: 1fr auto;
-    text-align: center;
-  }
-
-  /* show hamburger */
-  .hamburger {
-    display: flex;
-    justify-self: end;
-  }
-
-  /* hide desktop nav */
-  nav ul {
-    display: none;
-  }
-
-  h1.apple {
-    font-size: 1.8rem;
-    text-align: center;
-  }
-
-  /* Remove absolute positioning */
-  .side,
-  aside {
+  nav ul { display: none; }
+  .hamburger { display: flex; }
+  .apple { font-size: 22px; }
+  #center-logo { width: 150px; }
+  .side {
     position: static;
     width: 100%;
     max-width: 400px;
     margin: 20px auto;
     text-align: center;
   }
-
-  /* Timeline mobile */
-  .timeline {
-    flex-direction: column;
-    gap: 15px;
+  aside {
+    position: static;
+    width: 100%;
+    max-width: 400px;
+    margin: 20px auto;
   }
-  .timeline-item {
-    width: 90%;
-    margin: 0 auto;
-    text-align: center;
-  }
-
-  /* Start button */
   .start-btn {
-    font-size: 20px;
-    padding: 12px 30px;
-  }
-
-  canvas#particles {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100vw !important;
-    height: 100vh !important;
+    font-size: 18px;
+    padding: 12px 28px;
   }
 }
