@@ -72,7 +72,7 @@ nav ul.nav-links {
   display: block;
 }
 
-/* Logo center (main SVG) */
+/* Logo Center */
 #center-logo {
   width: 200px;
   max-width: 30vw;
@@ -80,8 +80,6 @@ nav ul.nav-links {
   display: block;
   margin: 20px auto;
 }
-
-/* Logo Container */
 .logo-container {
   position: relative;
   display: flex;
@@ -123,36 +121,42 @@ nav ul.nav-links {
   color: #ff0077;
 }
 
-/* Start Button */
+/* Neon Start Button */
 .start-btn-container {
   text-align: center;
   margin: 30px 0;
 }
 .start-btn {
   padding: 15px 40px;
-  border: 2px solid #03F091;
+  border: none;
   border-radius: 50px;
-  background: transparent;
-  color: #03F091;
+  background: linear-gradient(90deg,#03F091 0%,#00ff99 100%);
+  color: #0A0A0F;
   font-size: 24px;
-  text-decoration: none;
-  box-shadow: 0 0 20px #03F091, inset 0 0 10px #03F091;
-  transition: all 0.3s ease;
   font-family: monospace;
   font-weight: bold;
   letter-spacing: 2px;
+  text-decoration: none;
+  box-shadow: 0 0 35px #03F091, 0 0 5px #00ff99, inset 0 0 15px #03F091;
+  transition: background 0.3s, color 0.3s, transform 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+  outline: none;
+  display: inline-block;
+  text-align: center;
 }
-.start-btn:hover {
-  background: #03F091;
-  color: #0A0A0F;
-  box-shadow: 0 0 40px #03F091;
+.start-btn:hover, .start-btn:focus {
+  background: linear-gradient(90deg,#00ff99 0%,#03F091 100%);
+  color: #fff;
+  box-shadow: 0 0 60px #00ff99, 0 0 10px #03F091, inset 0 0 20px #03F091;
+  transform: scale(1.08);
 }
 
-/* Side Sections */
-.side {
+/* Insights Panel (Right) */
+.side.right {
   position: absolute;
   top: 200px;
-  width: 200px;
+  right: 30px;
+  width: 220px;
   padding: 20px;
   background: rgba(10, 10, 15, 0.86);
   border: 2px solid #03F091;
@@ -160,44 +164,25 @@ nav ul.nav-links {
   color: #fff;
   box-shadow: 0 0 10px rgba(3, 240, 145, 0.6);
   font-family: monospace;
+  z-index: 10;
 }
-.side.left { left: 30px; }
-.side.right { right: 30px; }
-
-.side h2 {
+.side.right h2 {
   font-size: 1.3rem;
   text-align: center;
   margin-bottom: 10px;
   color: #03F091;
 }
-
-.side p {
+.side.right p {
   font-size: 1rem;
   margin-bottom: 8px;
   word-break: break-word;
 }
 
-/* Timer */
-#timer-container {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  font-size: 22px;
-  border: 2px solid #03F091;
-  border-radius: 8px;
-  padding: 10px;
-  background: #0A0A0F;
-  box-shadow: 0 0 10px #03F091;
-  color: #03F091;
-  font-family: monospace;
-  z-index: 10;
-}
-
-/* Leaderboard container */
+/* Leaderboard on Left */
 aside {
   position: absolute;
   top: 120px;
-  right: 30px;
+  left: 30px;
   width: 250px;
   padding: 15px;
   border: 2px solid #03F091;
@@ -232,6 +217,22 @@ aside h2 {
 }
 #leaderboard li:first-child {
   background: #03F09122;
+}
+
+/* Timer */
+#timer-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  font-size: 22px;
+  border: 2px solid #03F091;
+  border-radius: 8px;
+  padding: 10px;
+  background: #0A0A0F;
+  box-shadow: 0 0 10px #03F091;
+  color: #03F091;
+  font-family: monospace;
+  z-index: 10;
 }
 
 /* Particle Canvas */
@@ -298,7 +299,7 @@ canvas#particles {
     padding: 8px 12px;
     min-width: 90px;
   }
-  .side, aside, #timer-container {
+  aside, .side.right, #timer-container {
     position: static !important;
     width: 95vw !important;
     max-width: 400px;
@@ -310,7 +311,7 @@ canvas#particles {
   aside {
     margin-top: 20px;
   }
-  .side {
+  .side.right {
     margin-bottom: 16px;
   }
   canvas#particles {
@@ -326,7 +327,7 @@ canvas#particles {
 }
 
 /* Make sure main stays above canvas on mobile */
-main, aside, header, .side, #timer-container, .start-btn, .timeline {
+main, aside, header, .side.right, #timer-container, .start-btn, .timeline {
   position: relative;
   z-index: 2;
 }
