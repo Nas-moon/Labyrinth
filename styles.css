@@ -24,6 +24,14 @@ header {
   width: 60px;
   height: auto;
 }
+
+.apple {
+  font-size: 30px;
+  font-weight: 800;
+  font-family: monospace;
+  color: #03F091;
+}
+
 nav ul {
   display: flex;
   justify-content: center;
