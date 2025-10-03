@@ -32,11 +32,11 @@ header {
   gap: 10px;
 }
 #logo {
-  height: 38px; /* smaller */
+  height: 32px; /* smaller logo */
   width: auto;
 }
 .apple {
-  font-size: 24px;
+  font-size: 22px;
   color: #03F091;
 }
 .nav-links {
@@ -55,9 +55,9 @@ header {
 .main-layout {
   display: grid;
   grid-template-columns: 260px 1fr 260px;
-  gap: 30px;
+  gap: 20px;
   max-width: 1200px;
-  margin: 30px auto;
+  margin: 20px auto;
   align-items: start;
 }
 
@@ -102,9 +102,8 @@ main {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
+  gap: 20px;
 }
-
 
 /* SVG Logo Animation */
 #center-logo {
@@ -113,37 +112,37 @@ main {
   stroke: #03F091;
   fill: none;
 }
-
 #center-logo path {
   stroke-linecap: round;
   stroke-linejoin: round;
   stroke: #03F091;
   fill: none;
   opacity: 0;
+  stroke-width: 2;
 }
 
-/* Full cycle: reset → draw → glow → fade → reset */
+/* Logo Animation Cycle */
 @keyframes logoCycle {
   0% {
-    stroke-dashoffset: var(--path-length); /* invisible line */
+    stroke-dashoffset: var(--path-length);
     opacity: 0;
   }
   10% {
-    opacity: 1; /* start appearing */
+    opacity: 1;
   }
   40% {
-    stroke-dashoffset: 0; /* fully drawn */
+    stroke-dashoffset: 0;
     opacity: 1;
   }
   60% {
-    opacity: 1; /* hold visible */
-    filter: drop-shadow(0 0 3px #03F091);
+    opacity: 1;
+    filter: drop-shadow(0 0 4px #03F091);
   }
   80% {
-    opacity: 0; /* fade out */
+    opacity: 0;
   }
   100% {
-    stroke-dashoffset: var(--path-length); /* reset */
+    stroke-dashoffset: var(--path-length);
     opacity: 0;
   }
 }
@@ -171,7 +170,6 @@ main {
   transform: scale(1.03);
   box-shadow: 0 0 18px rgba(3,240,145,0.9);
 }
-/* Finale Special */
 .timeline-item.finale {
   background: rgba(255, 20, 120, 0.15);
   border: 1px solid #ff1e7c;
