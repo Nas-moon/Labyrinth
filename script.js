@@ -52,7 +52,7 @@ window.addEventListener("resize", () => {
 // =======================
 
 // 🔹 Replace this with YOUR Google Sheets publish-to-web CSV link
-const SHEET_URL = "https://docs.google.com/spreadsheets/d/e/XXXXXX/pub?output=csv";
+const SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRtD8hiVqTsVuO4RIE0qPh0ch3VedcMyMVlkRr6VC8IXy0a_fwxtyV606fD9pMNTlg5SBVk5spAr2be/pub?output=csv";
 
 async function loadLeaderboard() {
   try {
