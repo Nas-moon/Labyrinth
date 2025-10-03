@@ -121,7 +121,7 @@ main {
   stroke-width: 2;
 }
 
-/* Logo Animation Cycle */
+/* Draw → glow → fade */
 @keyframes logoCycle {
   0% {
     stroke-dashoffset: var(--path-length);
