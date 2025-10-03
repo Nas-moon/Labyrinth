@@ -10,24 +10,23 @@ body {
   overflow-x: hidden;
 }
 
-/* Header */
+
 header {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr; /* left | center | right */
   align-items: center;
-  justify-content: space-between;
-  border: 2px solid #03F091;
-  border-radius: 8px;
-  margin: 10px;
   padding: 10px 20px;
+  border-radius: 8px;
+  border: 2px solid #03F091;
 }
-.header-logo {
+
+#logo {
   width: 60px;
   height: auto;
 }
 
 .apple {
-  flex-grow: 1;             /* takes up center space */
-  text-align: center;       /* centers text */
+  text-align: center;
   font-size: 40px;
   font-weight: 800;
   font-family: monospace;
@@ -37,17 +36,22 @@ header {
 
 nav ul {
   display: flex;
-  justify-content: center;
+  justify-content: flex-end; /* nav items stay right */
   gap: 30px;
   list-style: none;
+  margin: 0;
+  padding: 0;
 }
-nav a {
+
+.orange a {
+  font-size: 20px;
+  font-family: monospace;
+  font-weight: 600;
   color: #03F091;
   text-decoration: none;
-  font-size: 18px;
 }
-nav a:hover {
-  color: #fff;
+.orange a:hover {
+  color: #FFFFFF;
 }
 
 #center-logo {
