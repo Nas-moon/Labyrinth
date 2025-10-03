@@ -185,7 +185,7 @@ main {
 
 /* Start Button */
 .start-btn {
-  padding: 25px 40px;
+  padding: 15px 40px;
   border-radius: 50px;
   background: linear-gradient(90deg,#03F091 0%,#00ff99 100%);
   color: #0A0A0F;
@@ -198,7 +198,7 @@ main {
 }
 
 .start-btn-container{
-  margin: 10px auto;
+  margin-top: 15px;
 }
 .start-btn:hover {
   background: linear-gradient(90deg,#00ffaa 0%,#03F091 100%);
