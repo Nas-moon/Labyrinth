@@ -1,8 +1,5 @@
 /* Reset */
-body, ul, li, h1, h2, p {
-  margin: 0;
-  padding: 0;
-}
+body, ul, li, h1, h2, p { margin: 0; padding: 0; }
 body {
   background: linear-gradient(135deg, #0A0A0F, #0D0D13, #12121A);
   min-height: 100vh;
@@ -11,9 +8,36 @@ body {
   overflow-x: hidden;
 }
 
-/* ============================
-   Main Layout (Desktop First)
-============================ */
+/* Header */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 30px;
+}
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+#logo {
+  height: 50px;
+}
+.apple {
+  font-size: 28px;
+  color: #03F091;
+}
+.nav-links {
+  display: flex;
+  gap: 20px;
+  list-style: none;
+}
+.nav-links li a {
+  color: #03F091;
+  text-decoration: none;
+}
+
+/* Layout Grid */
 .main-layout {
   display: grid;
   grid-template-columns: 260px 1fr 260px;
@@ -24,7 +48,7 @@ body {
   position: relative;
 }
 
-/* Left Side (Rounds) */
+/* Sidebar Left */
 aside {
   background: rgba(10, 10, 15, 0.9);
   border: 2px solid #03F091;
@@ -33,7 +57,7 @@ aside {
   padding: 15px;
 }
 
-/* Right Side (Insights / Leaderboard) */
+/* Sidebar Right */
 .side.right {
   background: rgba(10,10,15,0.9);
   border: 2px solid #03F091;
@@ -41,40 +65,68 @@ aside {
   color: #fff;
   box-shadow: 0 0 15px rgba(3,240,145,0.6);
   padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* keeps timer at bottom */
+  min-height: 350px;
+}
+#timer-container {
+  margin-top: auto;
+  font-weight: bold;
+  text-align: center;
 }
 
-/* Main Center (Logo + Start Button) */
+/* Center Area */
 main {
   min-width: 0;
   text-align: center;
 }
-
 .logo-container {
-  margin: 30px 0;
+  margin: 20px 0;
 }
 #center-logo {
-  width: 180px;
+  width: 200px;
   max-width: 100%;
   height: auto;
   margin: 0 auto 20px auto;
   display: block;
 }
 
-/* ============================
-   Start Button
-============================ */
+/* Timeline */
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 20px 0;
+}
+.timeline-item {
+  padding: 10px;
+  border-radius: 6px;
+  font-weight: bold;
+  background: rgba(3,240,145,0.1);
+  border: 1px solid #03F091;
+  box-shadow: 0 0 12px rgba(3,240,145,0.5);
+  color: #03F091;
+}
+.timeline-item.finale {
+  background: rgba(255, 20, 120, 0.15);
+  border: 1px solid #ff1e7c;
+  box-shadow: 0 0 15px rgba(255,20,120,0.6);
+  color: #ff5fa3;
+}
+
+/* Start Button */
 .start-btn {
   padding: 15px 40px;
-  border: none;
   border-radius: 50px;
   background: linear-gradient(90deg,#03F091 0%,#00ff99 100%);
   color: #0A0A0F;
   font-size: 24px;
   font-weight: bold;
-  text-align: center;
   cursor: pointer;
   box-shadow: 0 0 20px rgba(3,240,145,0.7);
   transition: all 0.3s ease;
+  text-decoration: none;
 }
 .start-btn:hover {
   background: linear-gradient(90deg,#00ffaa 0%,#03F091 100%);
@@ -82,47 +134,16 @@ main {
   transform: scale(1.05);
 }
 
-/* ============================
-   Rounds Styling
-============================ */
-.rounds {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-.rounds li {
-  margin: 10px 0;
-  padding: 8px 12px;
-  border-radius: 6px;
-  font-weight: bold;
-  background: rgba(3,240,145,0.1);
-  border: 1px solid #03F091;
-  box-shadow: 0 0 12px rgba(3,240,145,0.5);
-  color: #03F091;
-  text-align: center;
-}
-/* Finale Special */
-.rounds li.finale {
-  background: rgba(255, 20, 120, 0.15);
-  border: 1px solid #ff1e7c;
-  box-shadow: 0 0 15px rgba(255,20,120,0.6);
-  color: #ff5fa3;
-}
-
-/* ============================
-   Leaderboard Compact
-============================ */
-#leaderboard {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-#leaderboard li {
-  margin: 8px 0;
-  padding: 6px 10px;
-  border-radius: 5px;
-  font-size: 15px;
-  color: #03F091;
-  background: rgba(3,240,145,0.1);
-  box-shadow: inset 0 0 8px rgba(3,240,145,0.4);
+/* Responsive: Mobile Stacked */
+@media (max-width: 900px) {
+  .main-layout {
+    grid-template-columns: 1fr;
+  }
+  aside, main, .side.right {
+    max-width: 500px;
+    margin: 0 auto;
+  }
+  .side.right {
+    min-height: auto;
+  }
 }
