@@ -196,6 +196,10 @@ main {
   transition: all 0.3s ease;
   text-decoration: none;
 }
+
+.start-btn-container{
+  margin: 10px auto;
+}
 .start-btn:hover {
   background: linear-gradient(90deg,#00ffaa 0%,#03F091 100%);
   box-shadow: 0 0 30px rgba(0,255,153,0.9);
