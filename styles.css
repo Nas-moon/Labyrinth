@@ -1,144 +1,212 @@
-/* =======================
-   General Layout
-======================= */
-body {
+/* =====================
+   General Reset
+===================== */
+* {
   margin: 0;
-  font-family: "Press Start 2P", monospace;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
   background: #000;
+  font-family: 'Courier New', monospace;
   color: #00ff99;
   text-align: center;
   overflow-x: hidden;
 }
 
-/* =======================
-   Navbar
-======================= */
-.navbar {
+/* =====================
+   Header
+===================== */
+header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px 30px;
+  padding: 10px 20px;
   border: 2px solid #00ff99;
-  margin: 15px;
   border-radius: 10px;
-  position: relative;
+  margin: 10px;
 }
 
-.navbar h1 {
-  margin: 0 auto; /* ✅ keeps it centered */
-  text-align: center;
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo img {
+  width: 30px;
+  height: 30px;
+}
+
+.logo h1 {
   font-size: 1.5rem;
+  color: #00ff99;
+  text-shadow: 0 0 5px #00ff99, 0 0 10px #00ff99;
 }
 
-.nav-links {
+nav {
   display: flex;
   gap: 20px;
 }
 
-.nav-links a {
-  text-decoration: none;
+nav a {
   color: #00ff99;
-  font-size: 1rem;
+  text-decoration: none;
+  font-weight: bold;
+  text-shadow: 0 0 5px #00ff99;
+  transition: color 0.3s;
 }
 
-/* Hamburger menu */
-.hamburger {
+nav a:hover {
+  color: #ff00ff;
+  text-shadow: 0 0 10px #ff00ff;
+}
+
+/* =====================
+   Hamburger Menu (hidden on desktop)
+===================== */
+.menu-toggle {
   display: none;
   flex-direction: column;
-  gap: 5px;
   cursor: pointer;
-  position: absolute;
-  right: 20px;
+  gap: 5px;
 }
 
-.hamburger span {
+.menu-toggle span {
   width: 25px;
   height: 3px;
   background: #00ff99;
-  border-radius: 2px;
+  box-shadow: 0 0 5px #00ff99;
 }
 
-/* =======================
-   Sections (Leaderboard, Insights, etc.)
-======================= */
-.side {
-  border: 2px solid #00ff99;
-  padding: 15px;
-  border-radius: 10px;
-  margin: 10px auto;
-  max-width: 300px;
+/* =====================
+   Hero / Logo Section
+===================== */
+.hero img {
+  width: 100px;
+  margin: 20px auto;
+  display: block;
+  filter: drop-shadow(0 0 10px #00ff99);
 }
 
-/* =======================
+/* =====================
    Round Buttons
-======================= */
-.timeline {
+===================== */
+.rounds {
   display: flex;
   justify-content: center;
-  flex-wrap: wrap; /* ✅ allows wrapping */
+  flex-wrap: wrap;
   gap: 15px;
   margin: 20px 0;
 }
 
-.timeline button {
-  padding: 12px 18px;
+.rounds button {
+  min-width: 120px;
+  padding: 10px 20px;
   border: 2px solid #00ff99;
   border-radius: 10px;
   background: transparent;
   color: #00ff99;
-  cursor: pointer;
-  transition: 0.2s;
+  font-weight: bold;
+  text-shadow: 0 0 5px #00ff99, 0 0 10px #00ff99;
+  box-shadow: 0 0 10px #00ff99, inset 0 0 5px #00ff99;
+  transition: all 0.3s;
 }
 
-.timeline button:hover {
-  background: #00ff99;
-  color: black;
-}
-
-/* Special Finale button */
-.timeline button.finale {
-  border-color: #ff00ff;
+.rounds button:hover {
   color: #ff00ff;
-}
-.timeline button.finale:hover {
-  background: #ff00ff;
-  color: black;
+  border-color: #ff00ff;
+  box-shadow: 0 0 15px #ff00ff, inset 0 0 8px #ff00ff;
 }
 
-/* =======================
-   Responsive Fixes
-======================= */
+/* Finale button special color */
+.rounds button.finale {
+  border-color: #ff0080;
+  color: #ff0080;
+  text-shadow: 0 0 5px #ff0080;
+  box-shadow: 0 0 10px #ff0080, inset 0 0 5px #ff0080;
+}
+
+/* =====================
+   Start Button
+===================== */
+.start-btn {
+  display: inline-block;
+  padding: 15px 30px;
+  border: 2px solid #00ff99;
+  border-radius: 50px;
+  background: transparent;
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: #00ff99;
+  margin: 20px 0;
+  text-shadow: 0 0 5px #00ff99, 0 0 10px #00ff99;
+  box-shadow: 0 0 20px #00ff99, inset 0 0 10px #00ff99;
+  transition: all 0.3s;
+  white-space: nowrap;
+}
+
+.start-btn:hover {
+  color: #ff00ff;
+  border-color: #ff00ff;
+  box-shadow: 0 0 25px #ff00ff, inset 0 0 15px #ff00ff;
+}
+
+/* =====================
+   Cards (Leaderboard, Insights)
+===================== */
+.card {
+  border: 2px solid #00ff99;
+  border-radius: 10px;
+  margin: 20px auto;
+  padding: 15px;
+  max-width: 400px;
+  text-align: left;
+  box-shadow: 0 0 10px #00ff99;
+}
+
+.card h2 {
+  margin-bottom: 10px;
+  color: #00ff99;
+  text-shadow: 0 0 5px #00ff99;
+}
+
+/* Timer */
+#timer {
+  font-size: 1.5rem;
+  margin-top: 10px;
+  display: inline-block;
+  padding: 5px 15px;
+  border: 2px solid #00ff99;
+  border-radius: 10px;
+  box-shadow: 0 0 10px #00ff99;
+}
+
+/* =====================
+   Mobile Styles
+===================== */
 @media (max-width: 768px) {
-  /* Navbar */
-  .nav-links {
-    display: none; /* hide by default */
+  nav {
+    display: none;
     flex-direction: column;
-    gap: 15px;
     background: #000;
-    position: absolute;
-    top: 60px;
-    right: 20px;
     border: 2px solid #00ff99;
     border-radius: 10px;
-    padding: 15px;
-    z-index: 100;
+    margin-top: 10px;
+    padding: 10px;
   }
 
-  .nav-links.active {
+  nav.active {
     display: flex;
   }
 
-  .hamburger {
+  .menu-toggle {
     display: flex;
   }
 
-  /* Timeline buttons stack vertically */
-  .timeline {
+  .rounds {
     flex-direction: column;
     align-items: center;
-  }
-
-  .timeline button {
-    width: 80%;
   }
 }
