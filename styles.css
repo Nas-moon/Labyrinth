@@ -54,6 +54,14 @@ nav a:hover {
   z-index: 2;
 }
 
+#center-logo {
+  width: 200px;       /* try smaller width */
+  max-width: 25%;     /* never grow beyond 25% of the page */
+  height: auto;
+  display: block;
+  margin: 40px auto;  /* centers it and adds some breathing room */
+}
+
 #logo-placeholder svg {
   width: 320px;   /* scale down */
   height: auto;
