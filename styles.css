@@ -13,28 +13,33 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px 30px;
+  padding: 12px 25px;
+  border-bottom: 1px solid rgba(3,240,145,0.3);
 }
 .header-left {
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 10px;
 }
 #logo {
-  height: 50px;
+  height: 38px;  /* smaller logo */
+  width: auto;
 }
 .apple {
-  font-size: 28px;
+  font-size: 24px;
   color: #03F091;
+  margin-top: 2px; /* tiny vertical tweak */
 }
 .nav-links {
   display: flex;
-  gap: 20px;
+  gap: 18px;
   list-style: none;
 }
 .nav-links li a {
   color: #03F091;
   text-decoration: none;
+  font-weight: bold;
+  font-size: 15px;
 }
 
 /* Layout Grid */
@@ -84,35 +89,51 @@ main {
 .logo-container {
   margin: 20px 0;
 }
+
 #center-logo {
-  width: 200px;
-  max-width: 100%;
-  height: auto;
-  margin: 0 auto 20px auto;
-  display: block;
+  width: 160px; /* slightly smaller */
+  margin: 0 auto 12px auto; /* reduced bottom margin */
+}
+
 }
 
 /* Timeline */
 .timeline {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  margin: 20px 0;
+  gap: 8px; /* reduced from 20px */
+  margin: 12px 0 18px 0;
 }
+
 .timeline-item {
   padding: 10px;
   border-radius: 6px;
   font-weight: bold;
   background: rgba(3,240,145,0.1);
   border: 1px solid #03F091;
-  box-shadow: 0 0 12px rgba(3,240,145,0.5);
+  box-shadow: 0 0 10px rgba(3,240,145,0.5);
   color: #03F091;
+  text-align: center;
+  transition: 0.3s ease;
 }
+
+.timeline-item:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 18px rgba(3,240,145,0.9);
+}
+
 .timeline-item.finale {
   background: rgba(255, 20, 120, 0.15);
   border: 1px solid #ff1e7c;
-  box-shadow: 0 0 15px rgba(255,20,120,0.6);
   color: #ff5fa3;
+  box-shadow: 0 0 14px rgba(255, 61, 150, 0.9), 
+              0 0 28px rgba(255, 61, 150, 0.5);
+}
+
+.timeline-item.finale:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(255, 61, 150, 1),
+              0 0 36px rgba(255, 20, 120, 0.7);
 }
 
 /* Start Button */
