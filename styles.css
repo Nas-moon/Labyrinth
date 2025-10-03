@@ -39,28 +39,31 @@ nav a:hover {
   color: #fff;
 }
 
-/* Logo Container */
-.logo-container {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 400px;
-  margin: 20px auto;
+#center-logo {
+  width: 200px;      /* or whatever smaller size you prefer */
+  max-width: 30%;    /* keeps it from filling too much width */
+  height: auto;
+  display: block;
+  margin: 20px auto;  /* centers horizontally with some space from top */
 }
+
+/* Logo Container */
+
 .logo-svg {
   width: 280px;
   filter: drop-shadow(0 0 20px #00ff66) drop-shadow(0 0 60px #00ff99);
   z-index: 2;
 }
 
-#center-logo {
-  width: 200px;       /* try smaller width */
-  max-width: 25%;     /* never grow beyond 25% of the page */
-  height: auto;
-  display: block;
-  margin: 40px auto;  /* centers it and adds some breathing room */
+.logo-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: auto;   /* not 100vh if that causes stretching */
+  padding: 40px 0;
 }
+
 
 #logo-placeholder svg {
   width: 320px;   /* scale down */
