@@ -189,6 +189,47 @@ aside h2 {
   color: #03F091;
 }
 
+/* Make layout stack nicely on small screens */
+@media (max-width: 768px) {
+  body {
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+  }
+
+  nav {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 10px;
+  }
+
+  h1.apple {
+    font-size: 1.8rem; /* shrink title */
+    text-align: center;
+  }
+
+  .side {
+    width: 100%;      /* take full width */
+    margin: 10px 0;
+    padding: 10px;
+    text-align: center;
+  }
+
+  #leaderboard {
+    padding: 0;
+    margin: 0 auto;
+    max-width: 90%;
+  }
+
+  canvas#particles {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw !important;
+    height: 100vh !important;
+  }
+}
+
 /* Leaderboard list */
 #leaderboard {
   list-style: none;
