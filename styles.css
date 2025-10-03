@@ -1,7 +1,11 @@
+/* ========================
+   RESET
+======================== */
 body, ul, li, h1, h2, p {
   margin: 0;
   padding: 0;
 }
+
 body {
   background: linear-gradient(135deg, #0A0A0F, #0D0D13, #12121A);
   min-height: 100vh;
@@ -10,20 +14,97 @@ body {
   overflow-x: hidden;
 }
 
-/* Desktop Layout */
-.main-layout {
+/* ========================
+   HEADER
+======================== */
+header {
   display: grid;
-  grid-template-columns: 260px 1fr 260px;
-  gap: 36px;
-  align-items: start;
-  max-width: 1200px;
-  margin: 40px auto 0 auto;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: 2px solid #03F091;
   position: relative;
 }
 
-aside {
-  grid-column: 1;
-  width: 250px;
+#logo {
+  width: 50px;
+  height: auto;
+}
+
+.apple {
+  text-align: center;
+  font-size: 36px;
+  font-weight: 800;
+  color: #03F091;
+}
+
+nav ul {
+  display: flex;
+  gap: 25px;
+  list-style: none;
+}
+
+nav ul li a {
+  font-size: 18px;
+  font-weight: 600;
+  color: #03F091;
+  text-decoration: none;
+}
+
+nav ul li a:hover {
+  color: #fff;
+}
+
+/* Hamburger */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  cursor: pointer;
+}
+.hamburger div {
+  width: 28px;
+  height: 3px;
+  background: #03F091;
+  border-radius: 2px;
+}
+
+/* ========================
+   MAIN LAYOUT
+======================== */
+.main-layout {
+  display: grid;
+  grid-template-columns: minmax(200px, 250px) 1fr minmax(200px, 250px);
+  gap: 30px;
+  align-items: start;
+  max-width: 1200px;
+  margin: 40px auto 0 auto;
+  padding: 0 20px;
+}
+
+/* Center logo */
+.logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30px 0;
+}
+
+#center-logo {
+  width: 160px;
+  max-width: 35vw;
+  max-height: 160px;
+  height: auto;
+  margin: 20px auto;
+  display: block;
+}
+
+/* ========================
+   SIDE PANELS
+======================== */
+aside, .side.right {
   background: rgba(10, 10, 15, 0.89);
   border: 2px solid #03F091;
   border-radius: 10px;
@@ -31,74 +112,104 @@ aside {
   padding: 15px;
 }
 
-main {
-  grid-column: 2;
-  min-width: 0;
-}
-
 .side.right {
-  grid-column: 3;
-  width: 220px;
-  background: rgba(10,10,15,0.86);
-  border: 2px solid #03F091;
-  border-radius: 8px;
   color: #fff;
-  box-shadow: 0 0 10px rgba(3,240,145,0.6);
-  padding: 20px;
 }
 
-.logo-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 40px 0;
-}
-
-#center-logo {
-  width: 220px;
-  max-width: 100%;
-  height: auto;
-  margin: 20px auto;
-}
-
+/* ========================
+   BUTTON
+======================== */
 .start-btn {
-  padding: 15px 40px;
-  border: none;
+  display: inline-block;
+  padding: 14px 32px;
   border-radius: 50px;
   background: linear-gradient(90deg,#03F091 0%,#00ff99 100%);
   color: #0A0A0F;
-  font-size: 24px;
+  font-size: 20px;
   font-weight: bold;
   text-align: center;
+  white-space: nowrap;
+  max-width: 280px;
+  margin: 20px auto;
+  cursor: pointer;
+  box-shadow: 0 0 15px #03F091;
+}
+.start-btn:hover {
+  background: #03F091;
+  color: #0A0A0F;
 }
 
-/* Mobile Responsive Layout */
+/* ========================
+   LEADERBOARD
+======================== */
+#leaderboard {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#leaderboard li {
+  padding: 6px 10px;
+  border-bottom: 1px solid rgba(3,240,145,0.3);
+  font-weight: bold;
+}
+#leaderboard li:last-child {
+  border-bottom: none;
+}
+
+/* ========================
+   MOBILE RESPONSIVE
+======================== */
 @media (max-width: 900px) {
+  /* Layout stack */
   .main-layout {
-    display: block;
-    max-width: 100vw;
-    margin: 0;
-    padding: 0;
+    display: flex;
+    flex-direction: column;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0 10px;
   }
+
   aside, .side.right, main {
-    position: static;
-    width: 95vw;
-    max-width: 400px;
-    margin: 10px auto;
-    box-sizing: border-box;
+    width: 100%;
+    max-width: 420px;
+    margin: 15px auto;
   }
-  .logo-container {
-    padding: 20px 0;
-  }
+
+  /* Logo shrink */
   #center-logo {
-    width: auto;
-    max-width: 90vw;
-    height: auto;
-    margin: 10px auto;
+    width: 140px;
+    max-width: 60%;
+    margin: 20px auto;
   }
+
+  /* Button shrink */
   .start-btn {
     font-size: 18px;
-    padding: 12px 24px;
-    text-align: center;
+    padding: 12px 22px;
+    width: 100%;
+    max-width: 280px;
+    margin: 10px auto;
+  }
+
+  /* Nav collapse */
+  nav ul {
+    display: none;
+    flex-direction: column;
+    background: rgba(10, 10, 15, 0.95);
+    position: absolute;
+    top: 60px;
+    right: 20px;
+    padding: 15px;
+    border: 2px solid #03F091;
+    border-radius: 8px;
+  }
+
+  nav ul.show {
+    display: flex;
+  }
+
+  .hamburger {
+    display: flex;
   }
 }
