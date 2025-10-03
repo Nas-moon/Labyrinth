@@ -119,37 +119,34 @@ main {
   stroke-linejoin: round;
   stroke: #03F091;
   fill: none;
-  opacity: 0; /* start hidden */
+  opacity: 0;
 }
 
-/* Draw line */
-@keyframes draw {
+/* Full cycle: reset → draw → glow → fade → reset */
+@keyframes logoCycle {
   0% {
-    stroke-dashoffset: var(--path-length);
+    stroke-dashoffset: var(--path-length); /* invisible line */
+    opacity: 0;
+  }
+  10% {
+    opacity: 1; /* start appearing */
+  }
+  40% {
+    stroke-dashoffset: 0; /* fully drawn */
     opacity: 1;
+  }
+  60% {
+    opacity: 1; /* hold visible */
+    filter: drop-shadow(0 0 3px #03F091);
   }
   80% {
-    stroke-dashoffset: 0;
-    opacity: 1;
-  }
-  90% {
-    opacity: 0.8;
+    opacity: 0; /* fade out */
   }
   100% {
-    opacity: 0; /* vanish */
+    stroke-dashoffset: var(--path-length); /* reset */
+    opacity: 0;
   }
 }
-
-/* Minimal glow pulse (during "stay visible" phase) */
-@keyframes subtleGlow {
-  0% {
-    filter: drop-shadow(0 0 2px #03F091);
-  }
-  100% {
-    filter: drop-shadow(0 0 6px #00ffaa);
-  }
-}
-
 
 /* Timeline */
 .timeline {
