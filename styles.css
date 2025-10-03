@@ -130,3 +130,43 @@ canvas#particles {
   background: #0A0A0F;
   box-shadow: 0 0 10px #03F091;
 }
+
+/* Leaderboard container */
+aside {
+  position: absolute;
+  top: 120px;   /* adjust so it doesn't overlap header */
+  right: 30px;  /* stick it to the right */
+  width: 250px;
+  padding: 15px;
+  border: 2px solid #03F091;
+  border-radius: 10px;
+  background: rgba(10, 10, 15, 0.85);
+  color: #03F091;
+  font-family: monospace;
+  box-shadow: 0 0 20px rgba(3, 240, 145, 0.5);
+}
+
+/* Leaderboard title */
+aside h2 {
+  text-align: center;
+  font-size: 22px;
+  margin-bottom: 10px;
+  color: #03F091;
+}
+
+/* Leaderboard list */
+#leaderboard {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+#leaderboard li {
+  padding: 6px 10px;
+  font-size: 16px;
+  border-bottom: 1px solid rgba(3, 240, 145, 0.3);
+}
+
+#leaderboard li:last-child {
+  border-bottom: none;
+}
