@@ -1,212 +1,309 @@
-/* =====================
-   General Reset
-===================== */
-* {
+/* Reset */
+body, ul, li, h1, h2, p {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
 }
-
 body {
-  background: #000;
-  font-family: 'Courier New', monospace;
-  color: #00ff99;
-  text-align: center;
+  background: linear-gradient(135deg, #0A0A0F, #0D0D13, #12121A);
+  min-height: 100vh;
+  font-family: monospace;
+  color: #03F091;
   overflow-x: hidden;
 }
 
-/* =====================
-   Header
-===================== */
+/* ======================
+   Header + Navigation
+====================== */
 header {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr; /* logo | title | nav */
   align-items: center;
   padding: 10px 20px;
-  border: 2px solid #00ff99;
-  border-radius: 10px;
-  margin: 10px;
+  border-radius: 8px;
+  border: 2px solid #03F091;
+  position: relative;
 }
 
-.logo {
+#logo {
+  width: 60px;
+  height: auto;
+}
+
+.apple {
+  text-align: center;
+  font-size: 40px;
+  font-weight: 800;
+  font-family: monospace;
+  color: #03F091;
+  margin: 0;
+}
+
+/* Desktop nav */
+nav ul {
   display: flex;
-  align-items: center;
-  gap: 10px;
+  justify-content: flex-end;
+  gap: 30px;
+  list-style: none;
 }
 
-.logo img {
-  width: 30px;
-  height: 30px;
-}
-
-.logo h1 {
-  font-size: 1.5rem;
-  color: #00ff99;
-  text-shadow: 0 0 5px #00ff99, 0 0 10px #00ff99;
-}
-
-nav {
-  display: flex;
-  gap: 20px;
-}
-
-nav a {
-  color: #00ff99;
+.orange a {
+  font-size: 20px;
+  font-family: monospace;
+  font-weight: 600;
+  color: #03F091;
   text-decoration: none;
-  font-weight: bold;
-  text-shadow: 0 0 5px #00ff99;
-  transition: color 0.3s;
+}
+.orange a:hover {
+  color: #FFFFFF;
 }
 
-nav a:hover {
-  color: #ff00ff;
-  text-shadow: 0 0 10px #ff00ff;
-}
-
-/* =====================
-   Hamburger Menu (hidden on desktop)
-===================== */
-.menu-toggle {
+/* Hamburger (hidden by default) */
+.hamburger {
   display: none;
   flex-direction: column;
-  cursor: pointer;
-  gap: 5px;
-}
-
-.menu-toggle span {
+  justify-content: space-between;
   width: 25px;
-  height: 3px;
-  background: #00ff99;
-  box-shadow: 0 0 5px #00ff99;
+  height: 20px;
+  cursor: pointer;
 }
-
-/* =====================
-   Hero / Logo Section
-===================== */
-.hero img {
-  width: 100px;
-  margin: 20px auto;
+.hamburger span {
   display: block;
-  filter: drop-shadow(0 0 10px #00ff99);
+  height: 3px;
+  background: #03F091;
+  border-radius: 5px;
 }
 
-/* =====================
-   Round Buttons
-===================== */
-.rounds {
+/* Mobile nav (hidden initially) */
+nav {
+  position: relative;
+}
+nav ul.mobile-nav {
+  display: none;
+  flex-direction: column;
+  background: rgba(10, 10, 15, 0.95);
+  border: 2px solid #03F091;
+  border-radius: 8px;
+  padding: 15px;
+  gap: 15px;
+  position: absolute;
+  top: 50px;
+  right: 0;
+  z-index: 1000;
+}
+nav ul.mobile-nav.show {
+  display: flex;
+}
+
+/* ======================
+   Center Logo + Particles
+====================== */
+#center-logo {
+  width: 200px;
+  max-width: 30%;
+  height: auto;
+  display: block;
+  margin: 20px auto;
+}
+
+.logo-svg {
+  width: 280px;
+  filter: drop-shadow(0 0 20px #00ff66) drop-shadow(0 0 60px #00ff99);
+  z-index: 2;
+}
+.logo-container {
+  position: relative;
   display: flex;
   justify-content: center;
-  flex-wrap: wrap;
-  gap: 15px;
-  margin: 20px 0;
+  align-items: center;
+  padding: 40px 0;
+}
+#logo-placeholder svg {
+  width: 320px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+canvas#particles {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 1;
 }
 
-.rounds button {
-  min-width: 120px;
+/* ======================
+   Timeline
+====================== */
+.timeline {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 40px auto;
+  gap: 30px;
+}
+.timeline-item {
+  position: relative;
   padding: 10px 20px;
-  border: 2px solid #00ff99;
-  border-radius: 10px;
-  background: transparent;
-  color: #00ff99;
+  border: 2px solid #03F091;
+  border-radius: 8px;
+  background: rgba(3, 240, 145, 0.1);
   font-weight: bold;
-  text-shadow: 0 0 5px #00ff99, 0 0 10px #00ff99;
-  box-shadow: 0 0 10px #00ff99, inset 0 0 5px #00ff99;
-  transition: all 0.3s;
+  box-shadow: 0 0 10px #03F091;
+}
+.timeline-item.finale {
+  border-color: #ff0077;
+  box-shadow: 0 0 15px #ff0077;
+  color: #ff0077;
 }
 
-.rounds button:hover {
-  color: #ff00ff;
-  border-color: #ff00ff;
-  box-shadow: 0 0 15px #ff00ff, inset 0 0 8px #ff00ff;
-}
-
-/* Finale button special color */
-.rounds button.finale {
-  border-color: #ff0080;
-  color: #ff0080;
-  text-shadow: 0 0 5px #ff0080;
-  box-shadow: 0 0 10px #ff0080, inset 0 0 5px #ff0080;
-}
-
-/* =====================
+/* ======================
    Start Button
-===================== */
+====================== */
+.start-btn-container {
+  text-align: center;
+  margin: 30px;
+}
 .start-btn {
-  display: inline-block;
-  padding: 15px 30px;
-  border: 2px solid #00ff99;
+  padding: 15px 40px;
+  border: 2px solid #03F091;
   border-radius: 50px;
   background: transparent;
-  font-weight: bold;
-  font-size: 1.2rem;
-  color: #00ff99;
-  margin: 20px 0;
-  text-shadow: 0 0 5px #00ff99, 0 0 10px #00ff99;
-  box-shadow: 0 0 20px #00ff99, inset 0 0 10px #00ff99;
-  transition: all 0.3s;
-  white-space: nowrap;
+  color: #03F091;
+  font-size: 24px;
+  text-decoration: none;
+  box-shadow: 0 0 20px #03F091, inset 0 0 10px #03F091;
+  transition: all 0.3s ease;
 }
-
 .start-btn:hover {
-  color: #ff00ff;
-  border-color: #ff00ff;
-  box-shadow: 0 0 25px #ff00ff, inset 0 0 15px #ff00ff;
+  background: #03F091;
+  color: #0A0A0F;
+  box-shadow: 0 0 40px #03F091;
 }
 
-/* =====================
-   Cards (Leaderboard, Insights)
-===================== */
-.card {
-  border: 2px solid #00ff99;
-  border-radius: 10px;
-  margin: 20px auto;
+/* ======================
+   Side Sections + Leaderboard
+====================== */
+.side {
+  position: absolute;
+  top: 200px;
+  width: 200px;
+  padding: 20px;
+  background: rgba(10, 10, 15, 0.8);
+  border: 2px solid #03F091;
+  border-radius: 8px;
+}
+.side.left { left: 30px; }
+.side.right { right: 30px; }
+
+/* Leaderboard container */
+aside {
+  position: absolute;
+  top: 120px;
+  right: 30px;
+  width: 250px;
   padding: 15px;
-  max-width: 400px;
-  text-align: left;
-  box-shadow: 0 0 10px #00ff99;
-}
-
-.card h2 {
-  margin-bottom: 10px;
-  color: #00ff99;
-  text-shadow: 0 0 5px #00ff99;
-}
-
-/* Timer */
-#timer {
-  font-size: 1.5rem;
-  margin-top: 10px;
-  display: inline-block;
-  padding: 5px 15px;
-  border: 2px solid #00ff99;
+  border: 2px solid #03F091;
   border-radius: 10px;
-  box-shadow: 0 0 10px #00ff99;
+  background: rgba(10, 10, 15, 0.85);
+  color: #03F091;
+  font-family: monospace;
+  box-shadow: 0 0 20px rgba(3, 240, 145, 0.5);
 }
 
-/* =====================
-   Mobile Styles
-===================== */
+/* Leaderboard title */
+aside h2 {
+  text-align: center;
+  font-size: 22px;
+  margin-bottom: 10px;
+  color: #03F091;
+}
+
+/* Leaderboard list */
+#leaderboard {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+#leaderboard li {
+  padding: 6px 10px;
+  font-size: 16px;
+  border-bottom: 1px solid rgba(3, 240, 145, 0.3);
+  font-weight: bold;
+}
+#leaderboard li:last-child {
+  border-bottom: none;
+}
+
+/* ======================
+   Timer
+====================== */
+#timer-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  font-size: 22px;
+  border: 2px solid #03F091;
+  border-radius: 8px;
+  padding: 10px;
+  background: #0A0A0F;
+  box-shadow: 0 0 10px #03F091;
+}
+
+/* ======================
+   📱 Mobile Styles
+====================== */
 @media (max-width: 768px) {
-  nav {
+  header {
+    grid-template-columns: 1fr auto;
+    text-align: center;
+  }
+
+  /* show hamburger */
+  .hamburger {
+    display: flex;
+    justify-self: end;
+  }
+
+  /* hide desktop nav */
+  nav ul {
     display: none;
+  }
+
+  h1.apple {
+    font-size: 1.8rem;
+    text-align: center;
+  }
+
+  /* Remove absolute positioning */
+  .side,
+  aside {
+    position: static;
+    width: 100%;
+    max-width: 400px;
+    margin: 20px auto;
+    text-align: center;
+  }
+
+  /* Timeline mobile */
+  .timeline {
     flex-direction: column;
-    background: #000;
-    border: 2px solid #00ff99;
-    border-radius: 10px;
-    margin-top: 10px;
-    padding: 10px;
+    gap: 15px;
+  }
+  .timeline-item {
+    width: 90%;
+    margin: 0 auto;
+    text-align: center;
   }
 
-  nav.active {
-    display: flex;
+  /* Start button */
+  .start-btn {
+    font-size: 20px;
+    padding: 12px 30px;
   }
 
-  .menu-toggle {
-    display: flex;
-  }
-
-  .rounds {
-    flex-direction: column;
-    align-items: center;
+  canvas#particles {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw !important;
+    height: 100vh !important;
   }
 }
