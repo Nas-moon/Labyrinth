@@ -10,9 +10,7 @@ body {
   overflow-x: hidden;
 }
 
-/* HEADER styles stay as you had them! */
-
-/* Desktop grid layout for main content */
+/* Desktop Layout */
 .main-layout {
   display: grid;
   grid-template-columns: 260px 1fr 260px;
@@ -23,7 +21,6 @@ body {
   position: relative;
 }
 
-/* Left sidebar */
 aside {
   grid-column: 1;
   width: 250px;
@@ -34,13 +31,11 @@ aside {
   padding: 15px;
 }
 
-/* Center main content */
 main {
   grid-column: 2;
   min-width: 0;
 }
 
-/* Right sidebar */
 .side.right {
   grid-column: 3;
   width: 220px;
