@@ -126,33 +126,30 @@ if (hamburger && navLinks) {
 // =======================
 // Logo SVG Path Animation
 // =======================
-function animateLogo() {
+function animateLogoLoop() {
   const paths = document.querySelectorAll("#center-logo path");
 
   paths.forEach((path, i) => {
     const length = path.getTotalLength();
-    path.style.stroke = "#03F091";
-    path.style.fill = "none";
-    path.style.strokeWidth = "2";
+    path.style.setProperty("--path-length", length);
     path.style.strokeDasharray = length;
     path.style.strokeDashoffset = length;
 
-    // First only the "draw" animation with stagger
-    path.style.animation = `draw 2s ease forwards ${i * 0.05}s`;
-    
-    // After the draw is finished, trigger the glow
-    path.addEventListener("animationend", (e) => {
-      if (e.animationName === "draw") {
-        path.style.animation = `glow 2s ease-in-out infinite alternate`;
-      }
-    });
+    // Loop animation: draw → vanish → repeat
+    path.style.animation = `draw 6s ease-in-out ${i * 0.05}s infinite`;
+
+    // Add subtle glow while visible
+    path.style.animation += `, subtleGlow 2s ease-in-out ${i * 0.05 + 2}s infinite alternate`;
   });
 }
 
-// Wait until particles are animating
+// Wait for particles, then start
 window.addEventListener("load", () => {
   requestAnimationFrame(() => {
-    animateLogo();
+    animateLogoLoop();
   });
 });
+
+
+
 
