@@ -1,47 +1,73 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>Labyrinth</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="styles.css">
-  </head>
-  <body>
-    <header>
-      <img src="laby2.o.svg" alt="logo" id="logo">
-      <nav>
-        <ul>
-          <li class="apple"><a href="about.html">About</a></li>
-          <li class="apple"><a href="map.html">Map</a></li>
-          <li class="apple"><a href="gallery.html">Gallery</a></li>
-        </ul>
-      </nav>
-    </header>
-    <main>
-      <div class="divider"></div>
-      <div>
-        <h1 class="text">LABYRINTH</h1>
-        <h2 class="text">Round 1 - Invitation</h2>
-        <p>We welcome all the partcipants to the Round 1!<br>
-        Only those who prove their worth can proceed forward!</p>
-        <p>Find the invitation to enter into the Round 2. Only those with the invitation can enter the next level.</p>
-        <h3 class="text">Unlock the path. Claim the Invitation.</h3>
-      </div>
-      <div class="logo-container">
-        <img src="laby2.o.svg" class="logo" alt="Glowing Logo">
-        <canvas id="particles"></canvas>
-      </div>
-    </main>
-    <article>
-        <ul>
-           <li>Round 1</li>
-           <li>Round 2</li>
-           <li>Round 3</li>
-           <li>Round 4</li>
-           <li>Round 5</li>
-           <li>Finale</li>
-        </ul>
-    </article>
-    <script src="script.js"></script>
-  </body>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Labyrinth</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <img src="laby2.o.svg" alt="logo" class="header-logo">
+    <nav>
+      <ul>
+        <li><a href="about.html">About</a></li>
+        <li><a href="map.html">Map</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+    <!-- Center Logo -->
+    <div class="logo-container">
+      <!-- Inline SVG Logo -->
+      <svg class="logo-svg" width="320" height="320" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="250" cy="250" r="200" stroke="#03F091" stroke-width="8"/>
+        <path d="M150 250 H350" stroke="#03F091" stroke-width="6"/>
+        <path d="M250 150 V350" stroke="#03F091" stroke-width="6"/>
+      </svg>
+      <canvas id="particles"></canvas>
+    </div>
+
+    <!-- Timeline (Rounds Map) -->
+    <section class="timeline">
+      <div class="timeline-item">Round 1</div>
+      <div class="timeline-item">Round 2</div>
+      <div class="timeline-item">Round 3</div>
+      <div class="timeline-item">Round 4</div>
+      <div class="timeline-item">Round 5</div>
+      <div class="timeline-item finale">Finale</div>
+    </section>
+
+    <!-- Start Button -->
+    <div class="start-btn-container">
+      <a href="round1.html" class="start-btn">⚡ Start the Journey ⚡</a>
+    </div>
+
+    <!-- Side Sections -->
+    <section class="side left">
+      <h2>Leaderboard</h2>
+      <ul id="leaderboard">
+        <li>Loading...</li>
+      </ul>
+    </section>
+
+    <section class="side right">
+      <h2>Insights</h2>
+      <p>🔥 Avg. solve time: 12 mins</p>
+      <p>⚡ Fastest solve: 6 mins</p>
+      <p>🚀 Participation: 87%</p>
+    </section>
+  </main>
+
+  <!-- Timer -->
+  <div id="timer-container">
+    <span id="timer">00:00</span>
+  </div>
+
+  <script src="script.js"></script>
+</body>
 </html>
