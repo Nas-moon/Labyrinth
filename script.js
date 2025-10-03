@@ -126,8 +126,9 @@ if (hamburger && navLinks) {
 // =======================
 // Logo SVG Path Animation
 // =======================
-document.addEventListener("DOMContentLoaded", () => {
+function animateLogo() {
   const paths = document.querySelectorAll("#center-logo path");
+
   paths.forEach((path, i) => {
     const length = path.getTotalLength();
     path.style.stroke = "#03F091";
@@ -135,7 +136,23 @@ document.addEventListener("DOMContentLoaded", () => {
     path.style.strokeWidth = "2";
     path.style.strokeDasharray = length;
     path.style.strokeDashoffset = length;
-    path.style.animation = 
-      `draw 2s ease forwards ${i * 0.01}s, glow 2s ease-in-out infinite alternate ${2 + i * 0.01}s`;
+
+    // First only the "draw" animation with stagger
+    path.style.animation = `draw 2s ease forwards ${i * 0.05}s`;
+    
+    // After the draw is finished, trigger the glow
+    path.addEventListener("animationend", (e) => {
+      if (e.animationName === "draw") {
+        path.style.animation = `glow 2s ease-in-out infinite alternate`;
+      }
+    });
+  });
+}
+
+// Wait until particles are animating
+window.addEventListener("load", () => {
+  requestAnimationFrame(() => {
+    animateLogo();
   });
 });
+
