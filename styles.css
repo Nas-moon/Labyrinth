@@ -35,9 +35,10 @@ h3 {
 ul {
   display: flex;
   justify-content: flex-end;
+  align-items: space-between;
   gap: 20px; /* spacing between items */
   list-style: none; /* remove bullets */
-  margin: 0;
+  margin: 5px auto;
   padding: 0;
 }
 
