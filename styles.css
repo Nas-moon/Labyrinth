@@ -26,9 +26,10 @@ header {
 }
 
 .apple {
-  font-size: 50px;
+  font-size: 60px;
   text-align: center;
   padding: 5px 10px;
+  margin-left: 50px;
   font-weight: 800;
   font-family: monospace;
   color: #03F091;
