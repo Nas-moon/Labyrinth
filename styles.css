@@ -185,7 +185,7 @@ main {
 
 /* Start Button */
 .start-btn {
-  padding: 15px 40px;
+  padding: 25px 40px;
   border-radius: 50px;
   background: linear-gradient(90deg,#03F091 0%,#00ff99 100%);
   color: #0A0A0F;
