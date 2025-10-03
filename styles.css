@@ -53,6 +53,14 @@ nav a:hover {
   filter: drop-shadow(0 0 20px #00ff66) drop-shadow(0 0 60px #00ff99);
   z-index: 2;
 }
+
+#logo-placeholder svg {
+  width: 320px;   /* scale down */
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
 canvas#particles {
   position: absolute;
   top: 0; left: 0;
