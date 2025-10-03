@@ -46,15 +46,17 @@ window.addEventListener("resize", () => {
   canvas.height = window.innerHeight;
 });
 
+
 // =======================
 // Real-time Leaderboard from Google Sheets
 // =======================
 
 // 🔹 Your Google Sheets publish-to-web CSV link
 const SHEET_URL ="https://docs.google.com/spreadsheets/d/e/2PACX-1vRtD8hiVqTsVuO4RIE0qPh0ch3VedcMyMVlkRr6VC8IXy0a_fwxtyV606fD9pMNTlg5SBVk5spAr2be/pub?output=csv";
+
 async function loadLeaderboard() {
   try {
-    const res = await fetch(SHEET_URL);
+    const res = await fetch(SHEET_URL + "&t=" + Date.now()); // cache-busting
     const text = await res.text();
 
     // Split rows
@@ -85,17 +87,17 @@ async function loadLeaderboard() {
       return;
     }
 
-    // ✅ Compact rank style
+    // ✅ Compact rank style (ties share same number)
     let currentRank = 1;
     let previousScore = null;
 
     rows.forEach(([team, score], i) => {
       if (score !== previousScore) {
-        currentRank++; // only increase rank when score changes
+        currentRank = i + 1; // rank = list index + 1
       }
 
       const li = document.createElement("li");
-      li.textContent = `${currentRank - 1}. ${team} - ${score} pts`;
+      li.textContent = `${currentRank}. ${team} - ${score}`;
       leaderboard.appendChild(li);
 
       previousScore = score;
