@@ -198,7 +198,7 @@ main {
 }
 
 .start-btn-container{
-  gap: 10px;
+  gap: 15px;
 }
 .start-btn:hover {
   background: linear-gradient(90deg,#00ffaa 0%,#03F091 100%);
