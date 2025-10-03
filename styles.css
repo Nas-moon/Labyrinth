@@ -26,13 +26,13 @@ header {
 }
 
 .apple {
-  font-size: 60px;
-  text-align: center;
-  padding: 5px 10px;
-  margin-left: 50px;
+  flex-grow: 1;             /* takes up center space */
+  text-align: center;       /* centers text */
+  font-size: 40px;
   font-weight: 800;
   font-family: monospace;
   color: #03F091;
+  margin: 0;
 }
 
 nav ul {
