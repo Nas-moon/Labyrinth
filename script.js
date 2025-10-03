@@ -51,34 +51,40 @@ window.addEventListener("resize", () => {
 // =======================
 
 // 🔹 Your Google Sheets publish-to-web CSV link
-const SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRtD8hiVqTsVuO4RIE0qPh0ch3VedcMyMVlkRr6VC8IXy0a_fwxtyV606fD9pMNTlg5SBVk5spAr2be/pub?output=csv";
+const SHEET_URL =
+  "https://docs.google.com/spreadsheets/d/e/2PACX-1vRtD8hiVqTsVuO4RIE0qPh0ch3VedcMyMVlkRr6VC8IXy0a_fwxtyV606fD9pMNTlg5SBVk5spAr2be/pub?output=csv";
 
 async function loadLeaderboard() {
   try {
     const res = await fetch(SHEET_URL);
     const text = await res.text();
+    console.log("📥 Raw CSV from Google Sheets:\n", text);
 
-    // Parse CSV rows
-    let rows = text.split("\n").map(r => r.split(","));
-    rows.shift(); // remove header row (Team Name, Score)
+    // Split rows
+    let rows = text.trim().split(/\r?\n/).map(r => r.split(","));
+    console.log("📊 Parsed rows:", rows);
 
-    // Filter out bad/empty rows
-    rows = rows.filter(r => r.length >= 2 && r[0].trim() !== "" && !isNaN(r[1]));
+    rows.shift(); // remove header row
 
-    // Sort and format
-    rows
-      .map(r => [r[0].trim(), Number(r[1])])
-      .sort((a, b) => b[1] - a[1])
-      .forEach((row, i) => {
-        const li = document.createElement("li");
-        li.textContent = `${i + 1}. ${row[0]} - ${row[1]} pts`;
-        leaderboard.appendChild(li);
-      });
+    rows = rows
+      .map(r => [r[0].trim().replace(/"/g, ""), Number(r[1]?.replace(/"/g, ""))])
+      .filter(r => r[0] !== "" && !isNaN(r[1]));
 
-    // Render to DOM
+    console.log("✅ Cleaned rows:", rows);
+
+    // Sort
+    rows.sort((a, b) => b[1] - a[1]);
+
     const leaderboard = document.getElementById("leaderboard");
     if (!leaderboard) return;
+
     leaderboard.innerHTML = "";
+
+    if (rows.length === 0) {
+      leaderboard.innerHTML = "<li>No data found</li>";
+      return;
+    }
+
     rows.forEach((row, i) => {
       const li = document.createElement("li");
       li.textContent = `${i + 1}. ${row[0]} - ${row[1]} pts`;
@@ -86,10 +92,9 @@ async function loadLeaderboard() {
     });
 
   } catch (e) {
-    console.error("Leaderboard error:", e);
+    console.error("❌ Leaderboard error:", e);
   }
 }
 
-// First load + refresh every 5s
 loadLeaderboard();
 setInterval(loadLeaderboard, 5000);
