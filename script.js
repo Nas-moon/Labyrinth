@@ -52,31 +52,32 @@ window.addEventListener("resize", () => {
 
 // 🔹 Your Google Sheets publish-to-web CSV link
 const SHEET_URL ="https://docs.google.com/spreadsheets/d/e/2PACX-1vRtD8hiVqTsVuO4RIE0qPh0ch3VedcMyMVlkRr6VC8IXy0a_fwxtyV606fD9pMNTlg5SBVk5spAr2be/pub?output=csv";
-
 async function loadLeaderboard() {
   try {
     const res = await fetch(SHEET_URL);
     const text = await res.text();
-    console.log("📥 Raw CSV from Google Sheets:\n", text);
 
     // Split rows
     let rows = text.trim().split(/\r?\n/).map(r => r.split(","));
-    console.log("📊 Parsed rows:", rows);
-
     rows.shift(); // remove header row
 
+    // Clean rows
     rows = rows
       .map(r => [r[0].trim().replace(/"/g, ""), Number(r[1]?.replace(/"/g, ""))])
       .filter(r => r[0] !== "" && !isNaN(r[1]));
 
-    console.log("✅ Cleaned rows:", rows);
+    // ✅ Prevent duplicates → keep only the latest score per team
+    const latestScores = {};
+    rows.forEach(([team, score]) => {
+      latestScores[team] = score;
+    });
+    rows = Object.entries(latestScores);
 
-    // Sort
+    // Sort by score (high to low)
     rows.sort((a, b) => b[1] - a[1]);
 
     const leaderboard = document.getElementById("leaderboard");
     if (!leaderboard) return;
-
     leaderboard.innerHTML = "";
 
     if (rows.length === 0) {
@@ -84,10 +85,20 @@ async function loadLeaderboard() {
       return;
     }
 
-    rows.forEach((row, i) => {
+    // ✅ Compact rank style
+    let currentRank = 1;
+    let previousScore = null;
+
+    rows.forEach(([team, score], i) => {
+      if (score !== previousScore) {
+        currentRank++; // only increase rank when score changes
+      }
+
       const li = document.createElement("li");
-      li.textContent = `${i + 1}. ${row[0]} - ${row[1]} pts`;
+      li.textContent = `${currentRank - 1}. ${team} - ${score} pts`;
       leaderboard.appendChild(li);
+
+      previousScore = score;
     });
 
   } catch (e) {
