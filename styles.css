@@ -1,266 +1,144 @@
-/* Reset */
-body, ul, li, h1, h2, p {
-  margin: 0;
-  padding: 0;
-}
-
-/* Body */
+/* =======================
+   General Layout
+======================= */
 body {
-  background: linear-gradient(135deg, #0A0A0F, #0D0D13, #12121A);
-  min-height: 100vh;
-  font-family: monospace;
-  color: #03F091;
+  margin: 0;
+  font-family: "Press Start 2P", monospace;
+  background: #000;
+  color: #00ff99;
+  text-align: center;
   overflow-x: hidden;
 }
 
-/* Header */
-header {
+/* =======================
+   Navbar
+======================= */
+.navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 15px;
-  border-radius: 8px;
-  border: 2px solid #03F091;
+  padding: 15px 30px;
+  border: 2px solid #00ff99;
+  margin: 15px;
+  border-radius: 10px;
   position: relative;
 }
 
-#logo {
-  width: 45px;
-  height: auto;
-}
-
-.apple {
-  font-size: 28px;
-  font-weight: 800;
-  font-family: monospace;
-  color: #03F091;
-  margin: 0;
+.navbar h1 {
+  margin: 0 auto; /* ✅ keeps it centered */
   text-align: center;
-  flex-grow: 1;
+  font-size: 1.5rem;
 }
 
-/* Hamburger */
+.nav-links {
+  display: flex;
+  gap: 20px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #00ff99;
+  font-size: 1rem;
+}
+
+/* Hamburger menu */
 .hamburger {
   display: none;
   flex-direction: column;
-  justify-content: center;
   gap: 5px;
   cursor: pointer;
+  position: absolute;
+  right: 20px;
 }
 
-.hamburger div {
+.hamburger span {
   width: 25px;
   height: 3px;
-  background: #03F091;
+  background: #00ff99;
   border-radius: 2px;
 }
 
-/* Desktop Nav */
-nav ul {
-  display: flex;
-  gap: 30px;
-  list-style: none;
-}
-
-.orange a {
-  font-size: 20px;
-  font-weight: 600;
-  color: #03F091;
-  text-decoration: none;
-}
-.orange a:hover {
-  color: #FFFFFF;
-}
-
-/* Mobile Nav */
-nav ul.mobile-nav {
-  display: none;
-  flex-direction: column;
-  background: rgba(10, 10, 15, 0.95);
-  border: 2px solid #03F091;
-  border-radius: 8px;
+/* =======================
+   Sections (Leaderboard, Insights, etc.)
+======================= */
+.side {
+  border: 2px solid #00ff99;
   padding: 15px;
-  gap: 15px;
-  position: absolute;
-  top: 60px;
-  right: 10px;
-  z-index: 1000;
-  min-width: 150px;
+  border-radius: 10px;
+  margin: 10px auto;
+  max-width: 300px;
 }
 
-nav ul.mobile-nav.show {
-  display: flex;
-}
-
-/* Center Logo */
-#center-logo {
-  width: 200px;
-  max-width: 30%;
-  height: auto;
-  display: block;
-  margin: 20px auto;
-}
-
-/* Logo SVG */
-.logo-svg {
-  width: 280px;
-  filter: drop-shadow(0 0 20px #00ff66) drop-shadow(0 0 60px #00ff99);
-  z-index: 2;
-}
-.logo-container {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 40px 0;
-}
-#logo-placeholder svg {
-  width: 320px;
-  height: auto;
-  display: block;
-  margin: 0 auto;
-}
-canvas#particles {
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  z-index: 1;
-}
-
-/* Timeline */
+/* =======================
+   Round Buttons
+======================= */
 .timeline {
   display: flex;
   justify-content: center;
-  align-items: center;
-  margin: 40px auto;
-  gap: 30px;
-}
-.timeline-item {
-  position: relative;
-  padding: 10px 20px;
-  border: 2px solid #03F091;
-  border-radius: 8px;
-  background: rgba(3, 240, 145, 0.1);
-  font-weight: bold;
-  box-shadow: 0 0 10px #03F091;
-}
-.timeline-item.finale {
-  border-color: #ff0077;
-  box-shadow: 0 0 15px #ff0077;
-  color: #ff0077;
+  flex-wrap: wrap; /* ✅ allows wrapping */
+  gap: 15px;
+  margin: 20px 0;
 }
 
-/* Start Button */
-.start-btn-container {
-  text-align: center;
-  margin: 30px;
-}
-.start-btn {
-  display: inline-block;
-  white-space: nowrap;
-  padding: 15px 40px;
-  border: 2px solid #03F091;
-  border-radius: 50px;
-  background: transparent;
-  color: #03F091;
-  font-size: 20px;
-  text-decoration: none;
-  box-shadow: 0 0 20px #03F091, inset 0 0 10px #03F091;
-  transition: all 0.3s ease;
-  max-width: 90%;
-  text-align: center;
-}
-.start-btn:hover {
-  background: #03F091;
-  color: #0A0A0F;
-  box-shadow: 0 0 40px #03F091;
-}
-
-/* Side Sections */
-.side {
-  position: absolute;
-  top: 200px;
-  width: 200px;
-  padding: 20px;
-  background: rgba(10, 10, 15, 0.8);
-  border: 2px solid #03F091;
-  border-radius: 8px;
-}
-.side.left { left: 30px; }
-.side.right { right: 30px; }
-
-/* Timer */
-#timer-container {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  font-size: 22px;
-  border: 2px solid #03F091;
-  border-radius: 8px;
-  padding: 10px;
-  background: #0A0A0F;
-  box-shadow: 0 0 10px #03F091;
-}
-
-/* Leaderboard container */
-aside {
-  position: absolute;
-  top: 120px;
-  right: 30px;
-  width: 250px;
-  padding: 15px;
-  border: 2px solid #03F091;
+.timeline button {
+  padding: 12px 18px;
+  border: 2px solid #00ff99;
   border-radius: 10px;
-  background: rgba(10, 10, 15, 0.85);
-  color: #03F091;
-  font-family: monospace;
-  box-shadow: 0 0 20px rgba(3, 240, 145, 0.5);
+  background: transparent;
+  color: #00ff99;
+  cursor: pointer;
+  transition: 0.2s;
 }
 
-/* Leaderboard title */
-aside h2 {
-  text-align: center;
-  font-size: 22px;
-  margin-bottom: 10px;
-  color: #03F091;
+.timeline button:hover {
+  background: #00ff99;
+  color: black;
 }
 
-/* Leaderboard list */
-#leaderboard {
-  list-style: none;
-  margin: 0;
-  padding: 0;
+/* Special Finale button */
+.timeline button.finale {
+  border-color: #ff00ff;
+  color: #ff00ff;
 }
-#leaderboard li {
-  padding: 6px 10px;
-  font-size: 16px;
-  border-bottom: 1px solid rgba(3, 240, 145, 0.3);
-}
-#leaderboard li:last-child {
-  border-bottom: none;
+.timeline button.finale:hover {
+  background: #ff00ff;
+  color: black;
 }
 
-/* Mobile Responsive */
+/* =======================
+   Responsive Fixes
+======================= */
 @media (max-width: 768px) {
-  nav ul { display: none; }
-  .hamburger { display: flex; }
-  .apple { font-size: 22px; }
-  #center-logo { width: 150px; }
-  .side {
-    position: static;
-    width: 100%;
-    max-width: 400px;
-    margin: 20px auto;
-    text-align: center;
+  /* Navbar */
+  .nav-links {
+    display: none; /* hide by default */
+    flex-direction: column;
+    gap: 15px;
+    background: #000;
+    position: absolute;
+    top: 60px;
+    right: 20px;
+    border: 2px solid #00ff99;
+    border-radius: 10px;
+    padding: 15px;
+    z-index: 100;
   }
-  aside {
-    position: static;
-    width: 100%;
-    max-width: 400px;
-    margin: 20px auto;
+
+  .nav-links.active {
+    display: flex;
   }
-  .start-btn {
-    font-size: 18px;
-    padding: 12px 28px;
+
+  .hamburger {
+    display: flex;
+  }
+
+  /* Timeline buttons stack vertically */
+  .timeline {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .timeline button {
+    width: 80%;
   }
 }
