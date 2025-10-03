@@ -93,4 +93,3 @@ async function loadLeaderboard() {
 // First load + refresh every 5s
 loadLeaderboard();
 setInterval(loadLeaderboard, 5000);
-
