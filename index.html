@@ -8,22 +8,25 @@
 </head>
 <body>
   <!-- Header -->
- 
-<header>
-  <div>
-    <img src="laby2.o.svg" alt="logo" id="logo">
-  </div>
-
-  <h1 class="apple">LABYRINTH</h1>
-
-  <nav>
-    <ul>
-      <li class="orange"><a href="about.html">About</a></li>
-      <li class="orange"><a href="map.html">Map</a></li>
-      <li class="orange"><a href="gallery.html">Gallery</a></li>
-    </ul>
-  </nav>
-</header>
+  <header>
+    <div>
+      <img src="laby2.o.svg" alt="logo" id="logo">
+    </div>
+    <h1 class="apple">LABYRINTH</h1>
+    <nav>
+      <ul class="nav-links">
+        <li class="orange"><a href="about.html">About</a></li>
+        <li class="orange"><a href="map.html">Map</a></li>
+        <li class="orange"><a href="gallery.html">Gallery</a></li>
+      </ul>
+      <!-- Hamburger button for mobile -->
+      <button class="hamburger" aria-label="Open navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </nav>
+  </header>
 
 
   <!-- Main Content -->
@@ -1411,43 +1414,47 @@
   <canvas id="particles"></canvas>
 </div>
 
-    <!-- Timeline (Rounds Map) -->
+      <!-- Timeline (Rounds Map) -->
     <section class="timeline">
-      <div class="timeline-item">Round 1</div>
-      <div class="timeline-item">Round 2</div>
-      <div class="timeline-item">Round 3</div>
-      <div class="timeline-item">Round 4</div>
-      <div class="timeline-item">Round 5</div>
-      <div class="timeline-item finale">Finale</div>
+      <div class="timeline-item">🟢 Round 1</div>
+      <div class="timeline-item">🔵 Round 2</div>
+      <div class="timeline-item">🟡 Round 3</div>
+      <div class="timeline-item">🟣 Round 4</div>
+      <div class="timeline-item">🟠 Round 5</div>
+      <div class="timeline-item finale">🏆 Finale</div>
     </section>
 
     <!-- Start Button -->
     <div class="start-btn-container">
-      <a href="round1.html" class="start-btn">⚡ Start the Journey ⚡</a>
+      <a href="start.html" class="start-btn">🚀 Start</a>
     </div>
 
-    <!-- Side Sections -->
     <section class="side left">
-      <h2>Leaderboard</h2>
-      <ul id="leaderboard">
-        <li>Loading...</li>
-      </ul>
+      <h2>ℹ️ Info</h2>
+      <p>Welcome to Labyrinth!</p>
     </section>
-
     <section class="side right">
-      <h2>Insights</h2>
+      <h2>📊 Insights</h2>
       <p>🔥 Avg. solve time: 12 mins</p>
       <p>⚡ Fastest solve: 6 mins</p>
       <p>🚀 Participation: 87%</p>
     </section>
   </main>
 
+  <!-- Leaderboard -->
+  <aside>
+    <h2>🏅 Leaderboard</h2>
+    <ul id="leaderboard"><li>Loading...</li></ul>
+  </aside>
+
   <!-- Timer -->
   <div id="timer-container">
-    <span id="timer">00:00</span>
+    ⏱️ Timer: <span id="timer">00:00</span>
   </div>
 
+  <!-- Particle Canvas -->
+  <canvas id="particles"></canvas>
+
   <script src="script.js"></script>
-  
 </body>
 </html>
