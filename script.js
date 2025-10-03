@@ -1,4 +1,6 @@
+// =======================
 // Particle Animation (Canvas)
+// =======================
 const canvas = document.getElementById("particles");
 const ctx = canvas.getContext("2d");
 
@@ -36,7 +38,6 @@ function animateParticles() {
 
   requestAnimationFrame(animateParticles);
 }
-
 animateParticles();
 
 // Handle Resize
@@ -44,3 +45,42 @@ window.addEventListener("resize", () => {
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
 });
+
+
+// =======================
+// Real-time Leaderboard from Google Sheets
+// =======================
+
+// 🔹 Replace this with YOUR Google Sheets publish-to-web CSV link
+const SHEET_URL = "https://docs.google.com/spreadsheets/d/e/XXXXXX/pub?output=csv";
+
+async function loadLeaderboard() {
+  try {
+    const res = await fetch(SHEET_URL);
+    const text = await res.text();
+
+    // Parse CSV rows
+    const rows = text.split("\n").map(r => r.split(","));
+    rows.shift(); // remove header row (Team Name, Score)
+
+    const leaderboard = document.getElementById("leaderboard");
+    if (!leaderboard) return; // avoid errors if element not found
+
+    leaderboard.innerHTML = "";
+
+    rows
+      .filter(r => r.length >= 2 && r[0].trim() !== "") // valid rows only
+      .sort((a, b) => Number(b[1]) - Number(a[1])) // sort by score
+      .forEach((row, i) => {
+        const li = document.createElement("li");
+        li.textContent = `${i + 1}. ${row[0]} - ${row[1]} pts`;
+        leaderboard.appendChild(li);
+      });
+  } catch (e) {
+    console.error("Leaderboard error:", e);
+  }
+}
+
+// First load + refresh every 5s
+loadLeaderboard();
+setInterval(loadLeaderboard, 5000);
