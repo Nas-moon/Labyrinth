@@ -59,6 +59,9 @@ async function loadLeaderboard() {
     const res = await fetch(SHEET_URL);
     const text = await res.text();
 
+    // 🔹 Debug: see what the sheet actually returns
+    console.log("Raw CSV:", text);
+
     // Parse CSV rows
     const rows = text.split("\n").map(r => r.split(","));
     rows.shift(); // remove header row (Team Name, Score)
@@ -84,3 +87,5 @@ async function loadLeaderboard() {
 // First load + refresh every 5s
 loadLeaderboard();
 setInterval(loadLeaderboard, 5000);
+
+
