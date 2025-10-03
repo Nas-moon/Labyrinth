@@ -18,6 +18,8 @@ html {
 }
 
 h1{
+  margin: 10px auto;
+  padding: 2px auto;
   font-size: 80px;
   font-weight: 800;
 }
@@ -37,6 +39,14 @@ ul {
   list-style: none; /* remove bullets */
   margin: 0;
   padding: 0;
+}
+
+a {
+  color: #03F091;
+  text-decoration: none; /* removes underline */
+}
+a:hover {
+  color: #FFFFFF; /* change on hover if you like */
 }
 
 p {
