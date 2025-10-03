@@ -8,13 +8,13 @@ canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
 let particles = [];
-for (let i = 0; i < 60; i++) {
+for (let i = 0; i < 80; i++) {
   particles.push({
     x: Math.random() * canvas.width,
     y: Math.random() * canvas.height,
     radius: Math.random() * 2 + 1,
-    dx: (Math.random() - 0.5) * 0.5,
-    dy: (Math.random() - 0.5) * 0.5
+    dx: (Math.random() - 0.5) * 0.6,
+    dy: (Math.random() - 0.5) * 0.6
   });
 }
 
@@ -46,37 +46,24 @@ window.addEventListener("resize", () => {
   canvas.height = window.innerHeight;
 });
 
-
 // =======================
-// Real-time Leaderboard from Google Sheets
+// Real-time Leaderboard
 // =======================
-
-// 🔹 Your Google Sheets publish-to-web CSV link
 const SHEET_URL ="https://docs.google.com/spreadsheets/d/e/2PACX-1vRtD8hiVqTsVuO4RIE0qPh0ch3VedcMyMVlkRr6VC8IXy0a_fwxtyV606fD9pMNTlg5SBVk5spAr2be/pub?output=csv";
 
 async function loadLeaderboard() {
   try {
-    const res = await fetch(SHEET_URL + "&t=" + Date.now()); // cache-busting
+    const res = await fetch(SHEET_URL + "&t=" + Date.now());
     const text = await res.text();
 
-    // Split rows
     let rows = text.trim().split(/\r?\n/).map(r => r.split(","));
-    rows.shift(); // remove header row
+    rows.shift();
+    rows = rows.map(r => [r[0].trim().replace(/"/g, ""), Number(r[1]?.replace(/"/g, ""))])
+               .filter(r => r[0] !== "" && !isNaN(r[1]));
 
-    // Clean rows
-    rows = rows
-      .map(r => [r[0].trim().replace(/"/g, ""), Number(r[1]?.replace(/"/g, ""))])
-      .filter(r => r[0] !== "" && !isNaN(r[1]));
-
-    // ✅ Prevent duplicates → keep only the latest score per team
     const latestScores = {};
-    rows.forEach(([team, score]) => {
-      latestScores[team] = score;
-    });
-    rows = Object.entries(latestScores);
-
-    // Sort by score (high to low)
-    rows.sort((a, b) => b[1] - a[1]);
+    rows.forEach(([team, score]) => { latestScores[team] = score; });
+    rows = Object.entries(latestScores).sort((a, b) => b[1] - a[1]);
 
     const leaderboard = document.getElementById("leaderboard");
     if (!leaderboard) return;
@@ -87,19 +74,16 @@ async function loadLeaderboard() {
       return;
     }
 
-    // ✅ Compact rank style (ties share same number)
     let currentRank = 1;
     let previousScore = null;
 
     rows.forEach(([team, score], i) => {
       if (score !== previousScore) {
-        currentRank = i + 1; // rank = list index + 1
+        currentRank = i + 1;
       }
-
       const li = document.createElement("li");
       li.textContent = `${currentRank}. ${team} - ${score}`;
       leaderboard.appendChild(li);
-
       previousScore = score;
     });
 
@@ -111,12 +95,11 @@ async function loadLeaderboard() {
 loadLeaderboard();
 setInterval(loadLeaderboard, 5000);
 
- // =======================
+// =======================
 // Hamburger Menu Toggle
 // =======================
 const hamburger = document.querySelector(".hamburger");
 const navLinks = document.querySelector(".nav-links");
-
 if (hamburger && navLinks) {
   hamburger.addEventListener("click", () => {
     navLinks.classList.toggle("active");
@@ -128,6 +111,7 @@ if (hamburger && navLinks) {
 // =======================
 function animateLogoLoop() {
   const paths = document.querySelectorAll("#center-logo path");
+  if (!paths.length) return;
 
   paths.forEach((path, i) => {
     const length = path.getTotalLength();
@@ -135,20 +119,14 @@ function animateLogoLoop() {
     path.style.strokeDasharray = length;
     path.style.strokeDashoffset = length;
 
-    // Animate in sequence, then repeat
-    path.style.animation = `logoCycle 8s ease-in-out ${i * 0.05}s infinite`;
+    // Animate sequentially, looping forever
+    path.style.animation = `logoCycle 6s ease-in-out ${i * 0.15}s infinite`;
   });
 }
 
-// Wait until particles ready
+// Run only after particles are ready
 window.addEventListener("load", () => {
-  requestAnimationFrame(() => {
+  setTimeout(() => {
     animateLogoLoop();
-  });
+  }, 500); // small delay so particles appear first
 });
-
-
-
-
-
-
