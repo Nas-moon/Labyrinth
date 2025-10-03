@@ -51,7 +51,7 @@ window.addEventListener("resize", () => {
 // Real-time Leaderboard from Google Sheets
 // =======================
 
-// 🔹 Replace this with YOUR Google Sheets publish-to-web CSV link
+// 🔹 Your Google Sheets publish-to-web CSV link
 const SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRtD8hiVqTsVuO4RIE0qPh0ch3VedcMyMVlkRr6VC8IXy0a_fwxtyV606fD9pMNTlg5SBVk5spAr2be/pub?output=csv";
 
 async function loadLeaderboard() {
@@ -59,26 +59,33 @@ async function loadLeaderboard() {
     const res = await fetch(SHEET_URL);
     const text = await res.text();
 
-    // 🔹 Debug: see what the sheet actually returns
-    console.log("Raw CSV:", text);
-
     // Parse CSV rows
-    const rows = text.split("\n").map(r => r.split(","));
+    let rows = text.split("\n").map(r => r.split(","));
     rows.shift(); // remove header row (Team Name, Score)
 
-    const leaderboard = document.getElementById("leaderboard");
-    if (!leaderboard) return; // avoid errors if element not found
+    // Filter out bad/empty rows
+    rows = rows.filter(r => r.length >= 2 && r[0].trim() !== "" && !isNaN(r[1]));
 
-    leaderboard.innerHTML = "";
-
+    // Sort and format
     rows
-      .filter(r => r.length >= 2 && r[0].trim() !== "") // valid rows only
-      .sort((a, b) => Number(b[1]) - Number(a[1])) // sort by score
+      .map(r => [r[0].trim(), Number(r[1])])
+      .sort((a, b) => b[1] - a[1])
       .forEach((row, i) => {
         const li = document.createElement("li");
         li.textContent = `${i + 1}. ${row[0]} - ${row[1]} pts`;
         leaderboard.appendChild(li);
       });
+
+    // Render to DOM
+    const leaderboard = document.getElementById("leaderboard");
+    if (!leaderboard) return;
+    leaderboard.innerHTML = "";
+    rows.forEach((row, i) => {
+      const li = document.createElement("li");
+      li.textContent = `${i + 1}. ${row[0]} - ${row[1]} pts`;
+      leaderboard.appendChild(li);
+    });
+
   } catch (e) {
     console.error("Leaderboard error:", e);
   }
@@ -87,5 +94,3 @@ async function loadLeaderboard() {
 // First load + refresh every 5s
 loadLeaderboard();
 setInterval(loadLeaderboard, 5000);
-
-
