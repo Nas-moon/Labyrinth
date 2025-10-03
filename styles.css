@@ -10,40 +10,45 @@ body {
   overflow-x: hidden;
 }
 
-/* Main Desktop Layout */
+/* HEADER styles stay as you had them! */
+
+/* Desktop grid layout for main content */
 .main-layout {
   display: grid;
   grid-template-columns: 260px 1fr 260px;
   gap: 36px;
   align-items: start;
-  max-width: 1100px;
+  max-width: 1200px;
   margin: 40px auto 0 auto;
   position: relative;
 }
 
+/* Left sidebar */
 aside {
   grid-column: 1;
   width: 250px;
   background: rgba(10, 10, 15, 0.89);
   border: 2px solid #03F091;
   border-radius: 10px;
-  box-shadow: 0 0 20px rgba(3, 240, 145, 0.5);
+  box-shadow: 0 0 20px rgba(3,240,145,0.5);
   padding: 15px;
 }
 
-.main {
+/* Center main content */
+main {
   grid-column: 2;
   min-width: 0;
 }
 
+/* Right sidebar */
 .side.right {
   grid-column: 3;
   width: 220px;
-  background: rgba(10, 10, 15, 0.86);
+  background: rgba(10,10,15,0.86);
   border: 2px solid #03F091;
   border-radius: 8px;
   color: #fff;
-  box-shadow: 0 0 10px rgba(3, 240, 145, 0.6);
+  box-shadow: 0 0 10px rgba(3,240,145,0.6);
   padding: 20px;
 }
 
@@ -65,7 +70,7 @@ aside {
   padding: 15px 40px;
   border: none;
   border-radius: 50px;
-  background: linear-gradient(90deg, #03F091 0%, #00ff99 100%);
+  background: linear-gradient(90deg,#03F091 0%,#00ff99 100%);
   color: #0A0A0F;
   font-size: 24px;
   font-weight: bold;
@@ -74,18 +79,12 @@ aside {
 
 /* Mobile Responsive Layout */
 @media (max-width: 900px) {
-  body {
-    background: linear-gradient(135deg, #0A0A0F, #0D0D13, #12121A);
-    color: #03F091;
-  }
-
   .main-layout {
     display: block;
     max-width: 100vw;
     margin: 0;
     padding: 0;
   }
-
   aside, .side.right, main {
     position: static;
     width: 95vw;
@@ -93,18 +92,15 @@ aside {
     margin: 10px auto;
     box-sizing: border-box;
   }
-
   .logo-container {
     padding: 20px 0;
   }
-
   #center-logo {
     width: auto;
     max-width: 90vw;
     height: auto;
     margin: 10px auto;
   }
-
   .start-btn {
     font-size: 18px;
     padding: 12px 24px;
