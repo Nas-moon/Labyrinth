@@ -1,4 +1,4 @@
-/* Reset */
+
 body, ul, li, h1, h2, p {
   margin: 0;
   padding: 0;
@@ -11,17 +11,13 @@ body {
   overflow-x: hidden;
 }
 
-/* ======================
-   Header + Navigation
-====================== */
 header {
   display: grid;
-  grid-template-columns: 1fr auto 1fr; /* logo | title | nav */
+  grid-template-columns: 1fr auto 1fr; /* logo | center title | nav */
   align-items: center;
   padding: 10px 20px;
   border-radius: 8px;
   border: 2px solid #03F091;
-  position: relative;
 }
 
 #logo {
@@ -38,12 +34,13 @@ header {
   margin: 0;
 }
 
-/* Desktop nav */
 nav ul {
   display: flex;
-  justify-content: flex-end;
+  justify-content: flex-end; /* nav items align right */
   gap: 30px;
   list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 .orange a {
@@ -53,76 +50,45 @@ nav ul {
   color: #03F091;
   text-decoration: none;
 }
+
 .orange a:hover {
   color: #FFFFFF;
 }
 
-/* Hamburger (hidden by default) */
-.hamburger {
-  display: none;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 25px;
-  height: 20px;
-  cursor: pointer;
-}
-.hamburger span {
-  display: block;
-  height: 3px;
-  background: #03F091;
-  border-radius: 5px;
-}
 
-/* Mobile nav (hidden initially) */
-nav {
-  position: relative;
-}
-nav ul.mobile-nav {
-  display: none;
-  flex-direction: column;
-  background: rgba(10, 10, 15, 0.95);
-  border: 2px solid #03F091;
-  border-radius: 8px;
-  padding: 15px;
-  gap: 15px;
-  position: absolute;
-  top: 50px;
-  right: 0;
-  z-index: 1000;
-}
-nav ul.mobile-nav.show {
-  display: flex;
-}
-
-/* ======================
-   Center Logo + Particles
-====================== */
 #center-logo {
-  width: 200px;
-  max-width: 30%;
+  width: 200px;      /* or whatever smaller size you prefer */
+  max-width: 30%;    /* keeps it from filling too much width */
   height: auto;
   display: block;
-  margin: 20px auto;
+  margin: 20px auto;  /* centers horizontally with some space from top */
 }
+
+/* Logo Container */
 
 .logo-svg {
   width: 280px;
   filter: drop-shadow(0 0 20px #00ff66) drop-shadow(0 0 60px #00ff99);
   z-index: 2;
 }
+
 .logo-container {
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
+  height: auto;   /* not 100vh if that causes stretching */
   padding: 40px 0;
 }
+
+
 #logo-placeholder svg {
-  width: 320px;
+  width: 320px;   /* scale down */
   height: auto;
   display: block;
   margin: 0 auto;
 }
+
 canvas#particles {
   position: absolute;
   top: 0; left: 0;
@@ -130,9 +96,7 @@ canvas#particles {
   z-index: 1;
 }
 
-/* ======================
-   Timeline
-====================== */
+/* Timeline */
 .timeline {
   display: flex;
   justify-content: center;
@@ -155,9 +119,7 @@ canvas#particles {
   color: #ff0077;
 }
 
-/* ======================
-   Start Button
-====================== */
+/* Start Button */
 .start-btn-container {
   text-align: center;
   margin: 30px;
@@ -179,9 +141,7 @@ canvas#particles {
   box-shadow: 0 0 40px #03F091;
 }
 
-/* ======================
-   Side Sections + Leaderboard
-====================== */
+/* Side Sections */
 .side {
   position: absolute;
   top: 200px;
@@ -194,11 +154,24 @@ canvas#particles {
 .side.left { left: 30px; }
 .side.right { right: 30px; }
 
+/* Timer */
+#timer-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  font-size: 22px;
+  border: 2px solid #03F091;
+  border-radius: 8px;
+  padding: 10px;
+  background: #0A0A0F;
+  box-shadow: 0 0 10px #03F091;
+}
+
 /* Leaderboard container */
 aside {
   position: absolute;
-  top: 120px;
-  right: 30px;
+  top: 120px;   /* adjust so it doesn't overlap header */
+  right: 30px;  /* stick it to the right */
   width: 250px;
   padding: 15px;
   border: 2px solid #03F091;
@@ -217,87 +190,37 @@ aside h2 {
   color: #03F091;
 }
 
-/* Leaderboard list */
-#leaderboard {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-#leaderboard li {
-  padding: 6px 10px;
-  font-size: 16px;
-  border-bottom: 1px solid rgba(3, 240, 145, 0.3);
-  font-weight: bold;
-}
-#leaderboard li:last-child {
-  border-bottom: none;
-}
-
-/* ======================
-   Timer
-====================== */
-#timer-container {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  font-size: 22px;
-  border: 2px solid #03F091;
-  border-radius: 8px;
-  padding: 10px;
-  background: #0A0A0F;
-  box-shadow: 0 0 10px #03F091;
-}
-
-/* ======================
-   📱 Mobile Styles
-====================== */
+/* Make layout stack nicely on small screens */
 @media (max-width: 768px) {
-  header {
-    grid-template-columns: 1fr auto;
+  body {
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+  }
+
+  nav {
+    flex-direction: column;
+    align-items: center;
     text-align: center;
-  }
-
-  /* show hamburger */
-  .hamburger {
-    display: flex;
-    justify-self: end;
-  }
-
-  /* hide desktop nav */
-  nav ul {
-    display: none;
+    gap: 10px;
   }
 
   h1.apple {
-    font-size: 1.8rem;
+    font-size: 1.8rem; /* shrink title */
     text-align: center;
   }
 
-  /* Remove absolute positioning */
-  .side,
-  aside {
-    position: static;
-    width: 100%;
-    max-width: 400px;
-    margin: 20px auto;
+  .side {
+    width: 100%;      /* take full width */
+    margin: 10px 0;
+    padding: 10px;
     text-align: center;
   }
 
-  /* Timeline mobile */
-  .timeline {
-    flex-direction: column;
-    gap: 15px;
-  }
-  .timeline-item {
-    width: 90%;
+  #leaderboard {
+    padding: 0;
     margin: 0 auto;
-    text-align: center;
-  }
-
-  /* Start button */
-  .start-btn {
-    font-size: 20px;
-    padding: 12px 30px;
+    max-width: 90%;
   }
 
   canvas#particles {
@@ -307,3 +230,71 @@ aside h2 {
     height: 100vh !important;
   }
 }
+
+/* Leaderboard list */
+#leaderboard {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+#leaderboard li {
+  padding: 6px 10px;
+  font-size: 16px;
+  border-bottom: 1px solid rgba(3, 240, 145, 0.3);
+}
+
+#leaderboard li:last-child {
+  border-bottom: none;
+}
+
+/* Leaderboard card style */
+.side {
+  background: rgba(0, 0, 0, 0.7);
+  border: 2px solid #03F091;
+  border-radius: 12px;
+  padding: 15px;
+  color: #fff;
+  box-shadow: 0 0 10px rgba(3, 240, 145, 0.6);
+  font-family: monospace;
+}
+
+/* Title */
+.side h2 {
+  font-size: 1.5rem;
+  text-align: center;
+  margin-bottom: 10px;
+  color: #03F091;
+}
+
+/* List */
+#leaderboard {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#leaderboard li {
+  padding: 6px 10px;
+  border-bottom: 1px solid rgba(3, 240, 145, 0.3);
+  font-weight: bold;
+}
+
+/* Remove last border */
+#leaderboard li:last-child {
+  border-bottom: none;
+}
+
+/* 📱 Mobile layout */
+@media (max-width: 768px) {
+  .side {
+    width: 100%;
+    max-width: 400px;
+    margin: 20px auto;
+    text-align: center;
+  }
+
+  #leaderboard li {
+    font-size: 1rem;
+  }
+}    
