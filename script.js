@@ -135,20 +135,19 @@ function animateLogoLoop() {
     path.style.strokeDasharray = length;
     path.style.strokeDashoffset = length;
 
-    // Loop animation: draw → vanish → repeat
-    path.style.animation = `draw 6s ease-in-out ${i * 0.05}s infinite`;
-
-    // Add subtle glow while visible
-    path.style.animation += `, subtleGlow 2s ease-in-out ${i * 0.05 + 2}s infinite alternate`;
+    // Animate in sequence, then repeat
+    path.style.animation = `logoCycle 8s ease-in-out ${i * 0.05}s infinite`;
   });
 }
 
-// Wait for particles, then start
+// Wait until particles ready
 window.addEventListener("load", () => {
   requestAnimationFrame(() => {
     animateLogoLoop();
   });
 });
+
+
 
 
 
