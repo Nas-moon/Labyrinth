@@ -6,4 +6,30 @@ body {
   overflow-x: hidden;
 }
 
+#particles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+}
+
+/* Header */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 25px;
+  border-bottom: 1px solid rgba(3,240,145,0.3);
+}
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+#laby {
+  height: 32px; /* smaller logo */
+  width: auto;
+}
 
