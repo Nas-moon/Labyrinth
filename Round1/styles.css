@@ -1,2 +1,9 @@
 body {
-  background-color: 
+  background: linear-gradient(135deg, #0A0A0F, #0D0D13, #12121A);
+  min-height: 100vh;
+  font-family: monospace;
+  color: #03F091;
+  overflow-x: hidden;
+}
+
+
