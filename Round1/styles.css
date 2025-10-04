@@ -23,7 +23,7 @@ header {
   padding: 12px 25px;
   border-bottom: 1px solid rgba(3,240,145,0.3);
 }
-.header-left {
+.heady {
   display: flex;
   align-items: center;
   gap: 10px;
@@ -33,3 +33,9 @@ header {
   width: auto;
 }
 
+.divider {
+   width: auto;
+   background-color: #140e20;
+   border: 2px;
+   height: 1px;
+}
