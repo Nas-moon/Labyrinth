@@ -63,3 +63,45 @@ header {
   border-radius: 40px;
   padding: 5px 5px;
 }
+
+#center-logo {
+  width: 200px;
+  height: auto;
+  stroke: #03F091;
+  fill: none;
+}
+#center-logo path {
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke: #03F091;
+  fill: none;
+  opacity: 0;
+  stroke-width: 2;
+}
+
+/* Draw → glow → fade */
+@keyframes logoCycle {
+  0% {
+    stroke-dashoffset: var(--path-length);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  40% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+  60% {
+    opacity: 1;
+    filter: drop-shadow(0 0 4px #03F091);
+  }
+  80% {
+    opacity: 0;
+  }
+  100% {
+    stroke-dashoffset: var(--path-length);
+    opacity: 0;
+  }
+}
+
