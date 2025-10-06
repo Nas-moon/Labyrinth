@@ -40,3 +40,32 @@ function animateParticles() {
 }
 animateParticles();
 
+function animateLogoLoop(maxLoops = 5) {
+  const paths = document.querySelectorAll("#center-logo path");
+  if (!paths.length) return;
+
+  paths.forEach((path, i) => {
+    const length = path.getTotalLength();
+    path.style.setProperty("--path-length", length);
+    path.style.strokeDasharray = length;
+    path.style.strokeDashoffset = length;
+
+    // Animate sequentially with limited loops
+    path.style.animation = `logoCycle 6s ease-in-out ${i * 0.15}s ${maxLoops}`;
+    
+    // When finished → freeze logo visible with glow
+    path.addEventListener("animationend", () => {
+      path.style.animation = "none"; // stop looping
+      path.style.strokeDashoffset = 0; // fully drawn
+      path.style.opacity = 1;
+      path.style.filter = "drop-shadow(0 0 5px #03F091)"; // permanent glow
+    }, { once: true });
+  });
+}
+
+// Run only after particles are ready
+window.addEventListener("load", () => {
+  setTimeout(() => {
+    animateLogoLoop(5);
+  }, 500);
+});
