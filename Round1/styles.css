@@ -44,11 +44,11 @@ header {
   border: 2px solid #03f091;
   display: flex;
   justify-content: space-between;
-  align-items: flex-box;
+  align-items: space-evenly;
   border-radius: 40px;
 }
 
 .genie {
   text-align: left;
-  margin-left: 0;
+  margin-left: 10px;
 }
