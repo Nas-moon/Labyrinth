@@ -68,7 +68,7 @@ header {
 
 
 #center-logo {
-  width: 200px;
+  width: 300px;
   height: auto;
   stroke: #03F091;
   fill: none;
@@ -106,5 +106,16 @@ header {
     stroke-dashoffset: var(--path-length);
     opacity: 0;
   }
+}
+
+.logo-container {
+  position: fixed; /* stays centered even when scrolling */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10; /* stays above background but below header if needed */
 }
 
