@@ -50,7 +50,7 @@ header {
 .genie {
   text-align: left;
   margin-left: 20px;
-  border: 2px solid #03f091;
+  border: 20px solid #03f091;
   border-radius: 40px;
 
 }
@@ -58,6 +58,6 @@ header {
 .aladdin {
   text-align: left;
   margin-left: 20px;
-  border: 2px solid #03f091;
-  border-radius: 40px;
+  border: 20px solid #03f091;
+  border-radius: 40px 40px 20px 20px;
 }
