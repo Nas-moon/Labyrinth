@@ -47,3 +47,8 @@ header {
   align-items: flex-box;
   border-radius: 40px;
 }
+
+.genie {
+  text-align: left;
+  margin-left: 0;
+}
