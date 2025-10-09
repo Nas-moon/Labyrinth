@@ -1,121 +1,81 @@
+/* Reset */
+body, ul, li, h1, h2, p, input, button { margin:0; padding:0; box-sizing:border-box; }
 body {
-  background: linear-gradient(135deg, #0A0A0F, #0D0D13, #12121A);
-  min-height: 100vh;
   font-family: monospace;
   color: #03F091;
+  background: linear-gradient(135deg,#0A0A0F,#12121A);
+  min-height: 100vh;
   overflow-x: hidden;
 }
 
+/* Particles */
 #particles {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: -1;
+  top:0; left:0;
+  width:100vw; height:100vh;
+  z-index:-1;
 }
 
 /* Header */
 header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 12px 25px;
-  border-bottom: 1px solid rgba(3,240,145,0.3);
+  display:flex;
+  justify-content:flex-start;
+  align-items:center;
+  padding:12px 25px;
+  border-bottom:1px solid rgba(3,240,145,0.3);
 }
-.heady {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+.header-left { display:flex; align-items:center; gap:10px; }
+#logo { height:38px; width:auto; }
+.apple { font-size:24px; color:#03F091; }
+
+/* Main */
+main { display:flex; justify-content:center; align-items:center; flex-direction:column; padding:20px; }
+.center-content { display:flex; flex-direction:column; align-items:center; gap:20px; text-align:center; }
+
+/* Team input */
+.team-input label { margin-right:10px; font-weight:bold; }
+.team-input input { padding:6px 10px; border-radius:6px; border:1px solid #03F091; background:#0A0A0F; color:#03F091; width:200px; }
+
+/* Tagline */
+.tagline { font-size:18px; color:#00E0FF; font-style:italic; }
+
+/* Start Button */
+.start-btn {
+  padding:12px 36px;
+  border-radius:50px;
+  background:linear-gradient(90deg,#03F091,#00ff99);
+  color:#0A0A0F;
+  font-size:22px;
+  font-weight:bold;
+  cursor:pointer;
+  border:none;
+  box-shadow:0 0 20px rgba(3,240,145,0.7);
+  transition:0.3s all ease;
 }
-#laby {
-  height: 32px; /* smaller logo */
-  width: auto;
+.start-btn:hover {
+  background:linear-gradient(90deg,#00ffaa,#03F091);
+  transform:scale(1.05);
+  box-shadow:0 0 30px rgba(0,255,153,0.9);
 }
 
-.divider {
-   width: auto;
-   background-color: #140e20;
-   border: 2px;
-   height: 1px;
-}
-
-.meaning {
-  display: grid;
-  grid-template-columns: 260px 1fr 260px;
-  gap: 20px;
-  max-width: 1200px;
-  margin: 20px auto;
-  align-items: start;
-}
-
-.genie {
-  text-align: center;
-  margin-left: 20px;
-  border: 15px solid #03f091;
-  border-radius: 40px;
-  padding: 5px 5px;
-
-}
-
-.aladdin {
-  text-align: center;
-  margin-left: 20px;
-  border: 15px solid #03f091;
-  border-radius: 40px;
-  padding: 5px 5px;
-}
-
-
-#center-logo {
-  width: 300px;
-  height: auto;
-  stroke: #03F091;
-  fill: none;
-}
+/* Center Logo Animation */
+#center-logo { width:200px; height:auto; stroke:#03F091; fill:none; }
 #center-logo path {
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  stroke: #03F091;
-  fill: none;
-  opacity: 0;
-  stroke-width: 2;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  stroke:#03F091;
+  fill:none;
+  opacity:0;
 }
 
-/* Draw → glow → fade */
-@keyframes logoCycle {
-  0% {
-    stroke-dashoffset: var(--path-length);
-    opacity: 0;
-  }
-  10% {
-    opacity: 1;
-  }
-  40% {
-    stroke-dashoffset: 0;
-    opacity: 1;
-  }
-  60% {
-    opacity: 1;
-    filter: drop-shadow(0 0 4px #03F091);
-  }
-  80% {
-    opacity: 0;
-  }
-  100% {
-    stroke-dashoffset: var(--path-length);
-    opacity: 0;
-  }
-}
+/* Memory Page */
+.memory-container { display:flex; flex-direction:column; align-items:center; gap:20px; }
+#memory-img { max-width:90%; border:2px solid #03F091; border-radius:10px; box-shadow:0 0 20px rgba(3,240,145,0.5);}
+#memory-form { border:0; border-radius:10px; box-shadow:0 0 20px rgba(3,240,145,0.5); }
 
-.logo-container {
-  position: fixed; /* stays centered even when scrolling */
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 10; /* stays above background but below header if needed */
+/* Responsive */
+@media(max-width:900px){
+  .team-input input { width:150px; }
+  #memory-img { max-width:100%; }
+  #memory-form { height:500px; }
 }
-
