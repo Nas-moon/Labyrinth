@@ -1,71 +1,91 @@
 // =======================
-// Particle Animation (Canvas)
+// Particle Animation
 // =======================
 const canvas = document.getElementById("particles");
 const ctx = canvas.getContext("2d");
-
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
 let particles = [];
-for (let i = 0; i < 80; i++) {
+for(let i=0;i<60;i++){
   particles.push({
-    x: Math.random() * canvas.width,
-    y: Math.random() * canvas.height,
-    radius: Math.random() * 2 + 1,
-    dx: (Math.random() - 0.5) * 0.6,
-    dy: (Math.random() - 0.5) * 0.6
+    x:Math.random()*canvas.width,
+    y:Math.random()*canvas.height,
+    radius:Math.random()*2+1,
+    dx:(Math.random()-0.5)*0.5,
+    dy:(Math.random()-0.5)*0.5
   });
 }
 
-function animateParticles() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  ctx.fillStyle = "#00ff66";
-  ctx.shadowBlur = 20;
-  ctx.shadowColor = "#00ff99";
+function animateParticles(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  ctx.fillStyle="#00ff66";
+  ctx.shadowBlur=20;
+  ctx.shadowColor="#00ff99";
 
-  particles.forEach(p => {
+  particles.forEach(p=>{
     ctx.beginPath();
-    ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+    ctx.arc(p.x,p.y,p.radius,0,Math.PI*2);
     ctx.fill();
-
-    p.x += p.dx;
-    p.y += p.dy;
-
-    if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
-    if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
+    p.x+=p.dx; p.y+=p.dy;
+    if(p.x<0||p.x>canvas.width)p.dx*=-1;
+    if(p.y<0||p.y>canvas.height)p.dy*=-1;
   });
-
   requestAnimationFrame(animateParticles);
 }
 animateParticles();
 
-function animateLogoLoop(maxLoops = 5) {
-  const paths = document.querySelectorAll("#center-logo path");
-  if (!paths.length) return;
+window.addEventListener("resize",()=>{
+  canvas.width=window.innerWidth;
+  canvas.height=window.innerHeight;
+});
 
-  paths.forEach((path, i) => {
-    const length = path.getTotalLength();
-    path.style.setProperty("--path-length", length);
-    path.style.strokeDasharray = length;
-    path.style.strokeDashoffset = length;
-
-    // Animate sequentially with limited loops
-    path.style.animation = `logoCycle 6s ease-in-out ${i * 0.15}s ${maxLoops}`;
-    
-    // When finished → freeze logo visible with glow
-    path.addEventListener("animationend", () => {
-      path.style.animation = "none"; // stop looping
-      path.style.strokeDashoffset = 0; // fully drawn
-      path.style.opacity = 1;
-      path.style.filter = "drop-shadow(0 0 5px #03F091)"; // permanent glow
-    }, { once: true });
+// =======================
+// SVG Logo Animation (Draw Once)
+// =======================
+function animateLogo(){
+  const paths=document.querySelectorAll("#center-logo path");
+  paths.forEach((p,i)=>{
+    const length=p.getTotalLength();
+    p.style.strokeDasharray=length;
+    p.style.strokeDashoffset=length;
+    p.style.opacity=1;
+    p.style.transition=`stroke-dashoffset 3s ease ${i*0.02}s, opacity 0.5s ease`;
+    setTimeout(()=>{p.style.strokeDashoffset=0;},50);
   });
 }
+window.addEventListener("load",()=>{animateLogo();});
 
-// Run only after particles are ready
-window.addEventListener("load", () => {
-  setTimeout(() => {
-    animateLogoLoop(5);
-  }, 500);
+// =======================
+// Team Name Handling & Enter Button
+// =======================
+const enterBtn=document.getElementById("enter-btn");
+enterBtn?.addEventListener("click",()=>{
+  const teamName=document.getElementById("team-name").value.trim();
+  if(!teamName){ alert("Please enter your team name."); return; }
+  localStorage.setItem("teamName",teamName);
+  window.location.href="memory.html";
 });
+
+// =======================
+// Memory Timer + Form Reveal
+// =======================
+if(document.getElementById("timer")){
+  let duration=5*60; // 5 minutes
+  const timerEl=document.getElementById("timer");
+  const imgEl=document.getElementById("memory-img");
+  const formEl=document.getElementById("memory-form");
+
+  const interval=setInterval(()=>{
+    const mins=Math.floor(duration/60).toString().padStart(2,'0');
+    const secs=(duration%60).toString().padStart(2,'0');
+    timerEl.textContent=`Time Left: ${mins}:${secs}`;
+    duration--;
+    if(duration<0){
+      clearInterval(interval);
+      imgEl.style.display="none";
+      formEl.style.display="block";
+      timerEl.textContent="Answer the questions below:";
+    }
+  },1000);
+}
