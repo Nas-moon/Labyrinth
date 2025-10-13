@@ -1,4 +1,4 @@
-// === PARTICLES BACKGROUND ===
+// Particles background (same as before)
 const canvas = document.getElementById("particles");
 const ctx = canvas.getContext("2d");
 canvas.width = window.innerWidth;
@@ -38,45 +38,61 @@ window.addEventListener("resize", () => {
   canvas.height = window.innerHeight;
 });
 
-// === CRYPTOGRAM GENERATION ===
+// --- CRYPTOGRAM GENERATION (fixed prefill logic) ---
 const lines = document.querySelectorAll(".crypto-line");
 const lettersToNumbers = {};
 let currentNumber = 1;
 
-// Count how many letters total to prefill ~6 of them
-let allLetters = [];
+// Count ALL letter positions (non-space) to choose random positions to prefill
+let totalLetterPositions = 0;
 lines.forEach(line => {
-  const ans = line.dataset.answer.toUpperCase();
-  for (let ch of ans) if (ch !== " ") allLetters.push(ch);
+  const answer = line.dataset.answer || "";
+  for (let ch of answer) if (ch !== " ") totalLetterPositions++;
 });
-const totalToPrefill = Math.min(6, allLetters.length);
-const randomPrefills = new Set();
-while (randomPrefills.size < totalToPrefill) {
-  randomPrefills.add(allLetters[Math.floor(Math.random() * allLetters.length)]);
+
+// how many fields to prefill (max 6)
+const TOTAL_TO_PREFILL = Math.min(6, totalLetterPositions);
+
+// pick unique random indices (0 .. totalLetterPositions-1)
+const prefillIndices = new Set();
+while (prefillIndices.size < TOTAL_TO_PREFILL) {
+  prefillIndices.add(Math.floor(Math.random() * totalLetterPositions));
 }
 
+// Now build the DOM, using a global index to decide which positions get prefilled
+let globalIndex = 0; // increments only on non-space letter occurrences
+
 lines.forEach(line => {
-  const answer = line.dataset.answer.toUpperCase();
+  const answer = (line.dataset.answer || "").toUpperCase();
   line.innerHTML = "";
 
   for (let ch of answer) {
     if (ch === " ") {
+      // spacer between words (small gap)
       const spacer = document.createElement("div");
       spacer.style.width = "14px";
+      spacer.style.display = "inline-block";
       line.appendChild(spacer);
       continue;
     }
 
+    // assign number for the letter (same number for same letters)
     if (!lettersToNumbers[ch]) lettersToNumbers[ch] = currentNumber++;
     const num = lettersToNumbers[ch];
 
+    // create input
     const input = document.createElement("input");
     input.setAttribute("maxlength", "1");
     input.dataset.letter = ch;
     input.dataset.num = num;
+    input.classList.add("crypto-input");
 
-    if (randomPrefills.has(ch)) input.value = ch;
+    // If this global position was chosen, prefill this instance only
+    if (prefillIndices.has(globalIndex)) {
+      input.value = ch;
+    }
 
+    // wrapper for input + number
     const wrapper = document.createElement("div");
     wrapper.style.display = "flex";
     wrapper.style.flexDirection = "column";
@@ -90,10 +106,12 @@ lines.forEach(line => {
     wrapper.appendChild(numEl);
 
     line.appendChild(wrapper);
+
+    globalIndex++;
   }
 });
 
-// === CHECK FUNCTION ===
+// --- VERIFY / CHECK FUNCTION ---
 function checkCrypto() {
   let allCorrect = true;
   lines.forEach(line => {
@@ -107,23 +125,34 @@ function checkCrypto() {
     });
   });
 
+  const logo = document.getElementById("center-logo");
+  const proceedBtn = document.getElementById("proceed-btn");
   if (allCorrect) {
-    document.getElementById("center-logo").style.animation = "pulse 1s infinite alternate";
-    document.getElementById("proceed-btn").style.display = "block";
+    if (logo) logo.style.animation = "pulse 1s infinite alternate";
+    if (proceedBtn) proceedBtn.style.display = "block";
   } else {
-    document.getElementById("center-logo").style.animation = "";
-    document.getElementById("proceed-btn").style.display = "none";
+    if (logo) logo.style.animation = "";
+    if (proceedBtn) proceedBtn.style.display = "none";
   }
 }
 
-// === LOGO PULSE ANIMATION ===
+// Pulse animation CSS injection (unchanged)
 const styleSheet = document.createElement("style");
 styleSheet.innerHTML = `
 @keyframes pulse {
-  0% { filter: drop-shadow(0 0 4px #03F091); }
-  100% { filter: drop-shadow(0 0 18px #00ff99); }
+  0%{filter: drop-shadow(0 0 4px #03F091);}
+  100%{filter: drop-shadow(0 0 18px #00ff99);}
 }`;
 document.head.appendChild(styleSheet);
 
-// === INPUT EVENTS ===
-document.addEventListener("input", checkCrypto);
+// Attach input listener to dynamic inputs
+document.querySelectorAll(".crypto-line input").forEach(input => {
+  input.addEventListener("input", checkCrypto);
+  input.addEventListener("keydown", e => {
+    // allow overwrite quickly: when typing a character, clear and let the typed char land
+    if (e.key.length === 1) input.value = '';
+  });
+});
+
+// initial check so prefilled boxes get their 'correct' state
+checkCrypto();
