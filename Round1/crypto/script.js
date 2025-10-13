@@ -45,6 +45,7 @@ lines.forEach(line=>{
   answer.forEach(word=>{
     const wordDiv = document.createElement("div");
     wordDiv.classList.add("word");
+    wordDiv.style.marginRight = "12px";
     for(let ch of word){
       if(!lettersToNumbers[ch]) lettersToNumbers[ch]=currentNumber++;
       const num = lettersToNumbers[ch];
