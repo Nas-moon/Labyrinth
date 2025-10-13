@@ -1,6 +1,8 @@
 /* Reset */
-body, ul, li, h1, h2, p { margin: 0; padding: 0; }
-
+body, ul, li, h1, h2, p {
+  margin: 0;
+  padding: 0;
+}
 body {
   background: linear-gradient(135deg, #0A0A0F, #0D0D13, #12121A);
   min-height: 100vh;
@@ -31,8 +33,14 @@ header {
   align-items: center;
   gap: 10px;
 }
-#logo { height: 38px; width: auto; }
-.apple { font-size: 24px; color: #03F091; }
+#logo {
+  height: 38px;
+  width: auto;
+}
+.apple {
+  font-size: 24px;
+  color: #03F091;
+}
 
 /* Main */
 main {
@@ -41,6 +49,7 @@ main {
   align-items: center;
   margin: 40px auto;
   text-align: center;
+  padding: 0 12px;
 }
 
 /* Center Logo */
@@ -58,104 +67,80 @@ main {
   stroke-dashoffset: 1000;
   animation: draw 2.5s ease forwards;
 }
-@keyframes draw { to { stroke-dashoffset: 0; } }
+@keyframes draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
 
-/* Cryptogram */
+/* Cryptogram Section */
 .crypto-paragraph {
   margin-top: 30px;
   display: flex;
   flex-direction: column;
-  gap: 20px; /* line spacing */
+  gap: 18px;
+  width: 100%;
+  align-items: center;
 }
 
 .crypto-line {
   display: flex;
-  gap: 0;
-  overflow-x: auto;
-  padding-bottom: 8px;
-  flex-wrap: nowrap;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 0 10px;
+  box-sizing: border-box;
 }
 
-.crypto-line::-webkit-scrollbar {
-  height: 6px;
-}
-.crypto-line::-webkit-scrollbar-thumb {
-  background-color: #03F09155;
-  border-radius: 3px;
-}
-
-.crypto-line .word {
-  display: flex;
-  gap: 4px;         /* gap between letters */
-  margin-right: 15px;/* gap between words */
-  flex-wrap: nowrap; /* prevent breaking letters */
-}
-
-.letter-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: fit-content;
-  height: fit-content;
-}
-
-/* Input fields */
-.crypto-input {
-  width: 32px;
-  height: 38px;
+/* Input Boxes */
+.crypto-line input {
+  width: 34px;
+  height: 40px;
   text-align: center;
-  background: rgba(0,0,0,0.3); /* subtle transparent box */
+  background: rgba(3, 240, 145, 0.08);
   border: 2px solid #03F091;
-  border-radius: 8px;
+  color: #03F091;
   font-weight: bold;
   font-size: 18px;
-  color: #03F091;
+  border-radius: 6px;
   outline: none;
-  box-shadow: 0 0 6px #03F091;
-  transition: all 0.3s ease;
-  animation: neon-glow 2s infinite alternate;
+  transition: 0.2s ease;
+  box-shadow: 0 0 6px rgba(3,240,145,0.3);
 }
 
-@keyframes neon-glow {
-  0% { box-shadow: 0 0 4px #03F091; color: #03F091; }
-  25% { box-shadow: 0 0 8px #FF00FF; color: #FF00FF; }
-  50% { box-shadow: 0 0 12px #00FFFF; color: #00FFFF; }
-  75% { box-shadow: 0 0 8px #FFAA00; color: #FFAA00; }
-  100% { box-shadow: 0 0 4px #03F091; color: #03F091; }
+.crypto-line input.correct {
+  background-color: rgba(3, 240, 145, 0.25);
+  box-shadow: 0 0 10px #03F091;
 }
 
-.crypto-input.correct {
-  background-color: #03F09133;
+.crypto-line input:focus {
+  border-color: #00ff99;
   box-shadow: 0 0 12px #00ff99;
 }
 
-.crypto-input:focus {
-  border-color: #00ff99;
-  box-shadow: 0 0 16px #00ff99;
-}
-
-/* Number below input */
-.letter-container .num {
-  display: block;
-  margin-top: 4px;
+/* Numbers below letters */
+.crypto-line .num {
   font-size: 12px;
   color: #00ff99;
+  display: block;
+  margin-top: 3px;
   text-align: center;
 }
 
-/* Proceed button */
+/* Proceed Button */
 #proceed-btn {
   margin-top: 25px;
   padding: 12px 30px;
   font-size: 20px;
   font-weight: bold;
   border-radius: 50px;
-  background: linear-gradient(90deg,#ff61a6 0%,#ff1e7c 100%);
+  background: linear-gradient(90deg, #ff61a6 0%, #ff1e7c 100%);
   border: none;
   cursor: pointer;
   color: #0A0A0F;
   box-shadow: 0 0 20px rgba(255,30,124,0.7);
   transition: all 0.3s ease;
+  display: none;
 }
 #proceed-btn:hover {
   transform: scale(1.05);
@@ -163,8 +148,9 @@ main {
 }
 
 /* Responsive */
-@media(max-width:900px){
-  .crypto-input{ width:28px; height:34px; font-size:16px;}
-  .letter-container .num{ font-size:10px; margin-top:3px;}
-  .crypto-line .word{ margin-right:12px;}
+@media (max-width: 900px) {
+  .crypto-line input {
+    width: 28px;
+    height: 34px;
+  }
 }
