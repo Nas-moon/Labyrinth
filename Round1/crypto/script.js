@@ -34,7 +34,7 @@ function animateParticles(){
 animateParticles();
 window.addEventListener("resize",()=>{canvas.width=window.innerWidth; canvas.height=window.innerHeight;});
 
-// Generate cryptogram inputs with words grouped
+// Generate cryptogram inputs with proper word grouping
 const lines = document.querySelectorAll(".crypto-line");
 const lettersToNumbers = {}; 
 let currentNumber = 1;
