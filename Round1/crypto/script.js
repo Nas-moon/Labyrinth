@@ -34,42 +34,40 @@ function animateParticles(){
 animateParticles();
 window.addEventListener("resize",()=>{canvas.width=window.innerWidth; canvas.height=window.innerHeight;});
 
-
-// Generate cryptogram inputs
+// Cryptogram input generation
 const lines = document.querySelectorAll(".crypto-line");
 const lettersToNumbers = {}; 
 let currentNumber = 1;
 
 lines.forEach(line=>{
-  const answer = line.dataset.answer.toUpperCase();
-  line.innerHTML = "";
+  const answer = line.dataset.answer.toUpperCase().split(' ');
+  line.innerHTML="";
+  answer.forEach(word=>{
+    const wordDiv = document.createElement("div");
+    wordDiv.classList.add("word");
+    for(let ch of word){
+      if(!lettersToNumbers[ch]) lettersToNumbers[ch]=currentNumber++;
+      const num = lettersToNumbers[ch];
+      const prefill = Math.random()<0.15?ch:'';
+      const input = document.createElement("input");
+      input.setAttribute("maxlength","1");
+      input.value = prefill;
+      input.dataset.letter = ch;
+      input.dataset.num = num;
+      wordDiv.appendChild(input);
 
-  for(let ch of answer){
-    if(ch===' '){
-      line.innerHTML+="<div style='width:12px'></div>";
-      continue;
+      const numEl = document.createElement("span");
+      numEl.classList.add("num");
+      numEl.textContent=num;
+      wordDiv.appendChild(numEl);
     }
-    if(!lettersToNumbers[ch]) lettersToNumbers[ch]=currentNumber++;
-    const num = lettersToNumbers[ch];
-    // prefill some random letters for hints
-    const prefill = Math.random()<0.2?ch:'';
-    const input = document.createElement("input");
-    input.setAttribute("maxlength","1");
-    input.value = prefill;
-    input.dataset.letter = ch;
-    input.dataset.num = num;
-    line.appendChild(input);
-
-    const numEl = document.createElement("span");
-    numEl.classList.add("num");
-    numEl.textContent=num;
-    line.appendChild(numEl);
-  }
+    line.appendChild(wordDiv);
+  });
 });
 
-// Check correctness
+// Verify function
 function checkCrypto(){
-  let allCorrect = true;
+  let allCorrect=true;
   lines.forEach(line=>{
     line.querySelectorAll("input").forEach(input=>{
       if(input.value.toUpperCase()===input.dataset.letter){
@@ -80,17 +78,19 @@ function checkCrypto(){
       }
     });
   });
-  // Animate logo when all correct
+
+  const logo = document.getElementById("center-logo");
+  const proceedBtn = document.getElementById("proceed-btn");
   if(allCorrect){
-    document.getElementById("center-logo").style.animation="pulse 1s infinite alternate";
-    document.getElementById("proceed-btn").style.display="block";
+    logo.style.animation="pulse 1s infinite alternate";
+    proceedBtn.style.display="block";
   } else {
-    document.getElementById("center-logo").style.animation="";
-    document.getElementById("proceed-btn").style.display="none";
+    logo.style.animation="";
+    proceedBtn.style.display="none";
   }
 }
 
-// Pulse animation for logo
+// Pulse animation
 const styleSheet = document.createElement("style");
 styleSheet.innerHTML = `
 @keyframes pulse {
@@ -99,10 +99,9 @@ styleSheet.innerHTML = `
 }`;
 document.head.appendChild(styleSheet);
 
-// Input events
 document.querySelectorAll(".crypto-line input").forEach(input=>{
   input.addEventListener("input",checkCrypto);
   input.addEventListener("keydown",e=>{
-    if(e.key.length===1) input.value=''; 
+    if(e.key.length===1) input.value='';
   });
 });
