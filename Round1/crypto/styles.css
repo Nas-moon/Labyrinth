@@ -71,8 +71,9 @@ main {
 .crypto-line {
   display: flex;
   gap: 0;
-  overflow-x: auto; /* allow scroll if too long */
+  overflow-x: auto;
   padding-bottom: 8px;
+  flex-wrap: nowrap;
 }
 
 .crypto-line::-webkit-scrollbar {
@@ -85,16 +86,17 @@ main {
 
 .crypto-line .word {
   display: flex;
-  gap: 4px;          /* gap between letters */
-  margin-right: 15px; /* gap between words */
-  flex-wrap: nowrap;   /* prevent breaking letters */
+  gap: 4px;         /* gap between letters */
+  margin-right: 15px;/* gap between words */
+  flex-wrap: nowrap; /* prevent breaking letters */
 }
 
 .letter-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-width: 36px;
+  width: fit-content;
+  height: fit-content;
 }
 
 /* Input fields */
@@ -102,15 +104,15 @@ main {
   width: 32px;
   height: 38px;
   text-align: center;
-  background: transparent;
+  background: rgba(0,0,0,0.3); /* subtle transparent box */
   border: 2px solid #03F091;
   border-radius: 8px;
   font-weight: bold;
   font-size: 18px;
   color: #03F091;
   outline: none;
-  transition: all 0.3s ease;
   box-shadow: 0 0 6px #03F091;
+  transition: all 0.3s ease;
   animation: neon-glow 2s infinite alternate;
 }
 
