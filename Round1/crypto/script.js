@@ -45,22 +45,30 @@ lines.forEach(line=>{
   answer.forEach(word=>{
     const wordDiv = document.createElement("div");
     wordDiv.classList.add("word");
-    wordDiv.style.marginRight = "12px";
+    wordDiv.style.marginRight = "15px";
     for(let ch of word){
       if(!lettersToNumbers[ch]) lettersToNumbers[ch]=currentNumber++;
       const num = lettersToNumbers[ch];
       const prefill = Math.random()<0.15?ch:'';
+      
+       const container = document.createElement("div");
+      container.style.display="flex";
+      container.style.flexDirection="column";
+      container.style.alignItems="center";
+
       const input = document.createElement("input");
       input.setAttribute("maxlength","1");
       input.value = prefill;
       input.dataset.letter = ch;
       input.dataset.num = num;
-      wordDiv.appendChild(input);
+       input.classList.add("crypto-input");
 
       const numEl = document.createElement("span");
       numEl.classList.add("num");
       numEl.textContent=num;
-      wordDiv.appendChild(numEl);
+       container.appendChild(input);
+      container.appendChild(numEl);
+      wordDiv.appendChild(container);
     }
     line.appendChild(wordDiv);
   });
