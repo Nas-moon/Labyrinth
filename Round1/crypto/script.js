@@ -34,40 +34,48 @@ function animateParticles(){
 animateParticles();
 window.addEventListener("resize",()=>{canvas.width=window.innerWidth; canvas.height=window.innerHeight;});
 
-
-// Generate cryptogram inputs
+// Generate cryptogram inputs with words grouped
 const lines = document.querySelectorAll(".crypto-line");
 const lettersToNumbers = {}; 
 let currentNumber = 1;
 
 lines.forEach(line=>{
-  const answer = line.dataset.answer.toUpperCase();
+  const words = line.dataset.answer.toUpperCase().split(' ');
   line.innerHTML = "";
 
-  for(let ch of answer){
-    if(ch===' '){
-      line.innerHTML+="<div style='width:12px'></div>";
-      continue;
-    }
-    if(!lettersToNumbers[ch]) lettersToNumbers[ch]=currentNumber++;
-    const num = lettersToNumbers[ch];
-    // prefill some random letters for hints
-    const prefill = Math.random()<0.2?ch:'';
-    const input = document.createElement("input");
-    input.setAttribute("maxlength","1");
-    input.value = prefill;
-    input.dataset.letter = ch;
-    input.dataset.num = num;
-    line.appendChild(input);
+  words.forEach(word=>{
+    const wordDiv = document.createElement("div");
+    wordDiv.classList.add("word");
 
-    const numEl = document.createElement("span");
-    numEl.classList.add("num");
-    numEl.textContent=num;
-    line.appendChild(numEl);
-  }
+    for(let ch of word){
+      if(!lettersToNumbers[ch]) lettersToNumbers[ch]=currentNumber++;
+      const num = lettersToNumbers[ch];
+      const prefill = Math.random()<0.2?ch:'';
+
+      const container = document.createElement("div");
+      container.classList.add("letter-container");
+
+      const input = document.createElement("input");
+      input.setAttribute("maxlength","1");
+      input.value = prefill;
+      input.dataset.letter = ch;
+      input.dataset.num = num;
+      input.classList.add("crypto-input");
+
+      const numEl = document.createElement("span");
+      numEl.classList.add("num");
+      numEl.textContent=num;
+
+      container.appendChild(input);
+      container.appendChild(numEl);
+      wordDiv.appendChild(container);
+    }
+
+    line.appendChild(wordDiv);
+  });
 });
 
-// Check correctness
+// Verify function
 function checkCrypto(){
   let allCorrect = true;
   lines.forEach(line=>{
@@ -80,17 +88,19 @@ function checkCrypto(){
       }
     });
   });
-  // Animate logo when all correct
+
+  const logo = document.getElementById("center-logo");
+  const proceedBtn = document.getElementById("proceed-btn");
   if(allCorrect){
-    document.getElementById("center-logo").style.animation="pulse 1s infinite alternate";
-    document.getElementById("proceed-btn").style.display="block";
+    logo.style.animation="pulse 1s infinite alternate";
+    proceedBtn.style.display="block";
   } else {
-    document.getElementById("center-logo").style.animation="";
-    document.getElementById("proceed-btn").style.display="none";
+    logo.style.animation="";
+    proceedBtn.style.display="none";
   }
 }
 
-// Pulse animation for logo
+// Pulse animation
 const styleSheet = document.createElement("style");
 styleSheet.innerHTML = `
 @keyframes pulse {
