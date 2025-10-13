@@ -65,4 +65,107 @@ main {
   margin-top: 30px;
   display: flex;
   flex-direction: column;
-  gap: 20px; /* li*
+  gap: 20px; /* vertical spacing between lines */
+}
+
+.crypto-line {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 0;
+}
+
+.crypto-line .word {
+  display: flex;
+  gap: 5px;          /* gap between letters inside word */
+  margin-right: 16px; /* gap between words */
+}
+
+.letter-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 36px; /* keeps aesthetic input width consistent */
+}
+
+/* Input fields (aesthetic) */
+.crypto-input {
+  width: 32px;
+  height: 38px;
+  text-align: center;
+  background: transparent;
+  border: 2px solid #03F091;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 18px;
+  color: #03F091;
+  outline: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 6px #03F091;
+  animation: neon-glow 2s infinite alternate;
+}
+
+/* Neon glow animation */
+@keyframes neon-glow {
+  0% { box-shadow: 0 0 4px #03F091; color: #03F091; }
+  25% { box-shadow: 0 0 8px #FF00FF; color: #FF00FF; }
+  50% { box-shadow: 0 0 12px #00FFFF; color: #00FFFF; }
+  75% { box-shadow: 0 0 8px #FFAA00; color: #FFAA00; }
+  100% { box-shadow: 0 0 4px #03F091; color: #03F091; }
+}
+
+/* Correct letters */
+.crypto-input.correct {
+  background-color: #03F09133;
+  box-shadow: 0 0 12px #00ff99;
+}
+
+/* Focus effect */
+.crypto-input:focus {
+  border-color: #00ff99;
+  box-shadow: 0 0 16px #00ff99;
+}
+
+/* Number below input */
+.letter-container .num {
+  display: block;
+  margin-top: 4px;
+  font-size: 12px;
+  color: #00ff99;
+  text-align: center;
+}
+
+/* Proceed button */
+#proceed-btn {
+  margin-top: 25px;
+  padding: 12px 30px;
+  font-size: 20px;
+  font-weight: bold;
+  border-radius: 50px;
+  background: linear-gradient(90deg,#ff61a6 0%,#ff1e7c 100%);
+  border: none;
+  cursor: pointer;
+  color: #0A0A0F;
+  box-shadow: 0 0 20px rgba(255,30,124,0.7);
+  transition: all 0.3s ease;
+}
+#proceed-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 30px rgba(255,30,124,0.9);
+}
+
+/* Responsive */
+@media(max-width:900px){
+  .crypto-input {
+    width: 28px;
+    height: 34px;
+    font-size: 16px;
+  }
+  .letter-container .num {
+    font-size: 10px;
+    margin-top: 3px;
+  }
+  .crypto-line .word {
+    margin-right: 12px;
+  }
+}
