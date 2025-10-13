@@ -72,13 +72,14 @@ main {
   display: flex;
   justify-content: flex-start;
   flex-wrap: wrap;
-  gap: 5px;
+  gap: 0px;
+  margin-bottom: 18px;
 }
 
 .crypto-line .word {
   display: flex;
   gap: 5px;          /* gap between letters inside word */
-  margin-right: 12px; /* space between words */
+  margin-right: 15px; /* space between words */
 }
 
 
@@ -95,6 +96,15 @@ main {
   outline: none;
   transition: 0.3s ease;
   animation: neon-glow 2s infinite alternate;
+  position: relative;
+}
+
+.crypto-line .num {
+  font-size: 12px;
+  color: #00ff99;
+  display: block;
+  margin-top: 4px; /* space below the input field */
+  text-align: center;
 }
 
 @keyframes neon-glow {
@@ -120,7 +130,7 @@ main {
   font-size: 12px;
   color: #00ff99;
   display: block;
-  margin-top: 2px;
+  margin-top: 4px;
   text-align: center;
 }
 
@@ -145,5 +155,13 @@ main {
 
 /* Responsive */
 @media(max-width:900px){
-  .crypto-line input{ width:28px; height:34px;}
+  .crypto-line input{ 
+    width:28px; 
+    height:34px;
+  } 
+
+ .crypto-line .num{
+    font-size:10px;
+    margin-top:3px;
+  }
 }
