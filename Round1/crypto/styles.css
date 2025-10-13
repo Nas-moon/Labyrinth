@@ -78,8 +78,19 @@ main {
 .crypto-line {
   display: flex;
   justify-content: center;
-  gap: 5px;
-  flex-wrap: wrap;
+  gap: 4px;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  padding-bottom: 5px;
+}
+
+.crypto-line::-webkit-scrollbar {
+  height: 6px;
+}
+
+.crypto-line::-webkit-scrollbar-thumb {
+  background-color: #03F09155;
+  border-radius: 3px;
 }
 
 .crypto-line input {
