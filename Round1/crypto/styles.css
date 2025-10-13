@@ -1,5 +1,6 @@
 /* Reset */
 body, ul, li, h1, h2, p { margin: 0; padding: 0; }
+
 body {
   background: linear-gradient(135deg, #0A0A0F, #0D0D13, #12121A);
   min-height: 100vh;
@@ -30,14 +31,8 @@ header {
   align-items: center;
   gap: 10px;
 }
-#logo {
-  height: 38px;
-  width: auto;
-}
-.apple {
-  font-size: 24px;
-  color: #03F091;
-}
+#logo { height: 38px; width: auto; }
+.apple { font-size: 24px; color: #03F091; }
 
 /* Main */
 main {
@@ -63,66 +58,86 @@ main {
   stroke-dashoffset: 1000;
   animation: draw 2.5s ease forwards;
 }
-@keyframes draw {
-  to { stroke-dashoffset: 0; }
-}
+@keyframes draw { to { stroke-dashoffset: 0; } }
 
 /* Cryptogram */
 .crypto-paragraph {
   margin-top: 30px;
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 20px; /* line spacing */
 }
 
 .crypto-line {
   display: flex;
-  justify-content: center;
-  gap: 4px;
-  flex-wrap: nowrap;
-  overflow-x: auto;
-  padding-bottom: 5px;
+  gap: 0;
+  overflow-x: auto; /* allow scroll if too long */
+  padding-bottom: 8px;
 }
 
 .crypto-line::-webkit-scrollbar {
   height: 6px;
 }
-
 .crypto-line::-webkit-scrollbar-thumb {
   background-color: #03F09155;
   border-radius: 3px;
 }
 
-.crypto-line input {
+.crypto-line .word {
+  display: flex;
+  gap: 4px;          /* gap between letters */
+  margin-right: 15px; /* gap between words */
+  flex-wrap: nowrap;   /* prevent breaking letters */
+}
+
+.letter-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 36px;
+}
+
+/* Input fields */
+.crypto-input {
   width: 32px;
   height: 38px;
   text-align: center;
   background: transparent;
   border: 2px solid #03F091;
-  color: #03F091;
+  border-radius: 8px;
   font-weight: bold;
   font-size: 18px;
-  border-radius: 6px;
+  color: #03F091;
   outline: none;
-  transition: 0.2s ease;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 6px #03F091;
+  animation: neon-glow 2s infinite alternate;
 }
 
-.crypto-line input.correct {
+@keyframes neon-glow {
+  0% { box-shadow: 0 0 4px #03F091; color: #03F091; }
+  25% { box-shadow: 0 0 8px #FF00FF; color: #FF00FF; }
+  50% { box-shadow: 0 0 12px #00FFFF; color: #00FFFF; }
+  75% { box-shadow: 0 0 8px #FFAA00; color: #FFAA00; }
+  100% { box-shadow: 0 0 4px #03F091; color: #03F091; }
+}
+
+.crypto-input.correct {
   background-color: #03F09133;
-  box-shadow: 0 0 8px #03F091;
-}
-
-.crypto-line input:focus {
-  border-color: #00ff99;
   box-shadow: 0 0 12px #00ff99;
 }
 
-/* Number below letter */
-.crypto-line .num {
+.crypto-input:focus {
+  border-color: #00ff99;
+  box-shadow: 0 0 16px #00ff99;
+}
+
+/* Number below input */
+.letter-container .num {
+  display: block;
+  margin-top: 4px;
   font-size: 12px;
   color: #00ff99;
-  display: block;
-  margin-top: 2px;
   text-align: center;
 }
 
@@ -147,5 +162,7 @@ main {
 
 /* Responsive */
 @media(max-width:900px){
-  .crypto-line input{ width:28px; height:34px;}
+  .crypto-input{ width:28px; height:34px; font-size:16px;}
+  .letter-container .num{ font-size:10px; margin-top:3px;}
+  .crypto-line .word{ margin-right:12px;}
 }
