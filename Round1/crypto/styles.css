@@ -1,5 +1,6 @@
 /* Reset */
 body, ul, li, h1, h2, p { margin: 0; padding: 0; }
+
 body {
   background: linear-gradient(135deg, #0A0A0F, #0D0D13, #12121A);
   min-height: 100vh;
@@ -30,14 +31,8 @@ header {
   align-items: center;
   gap: 10px;
 }
-#logo {
-  height: 38px;
-  width: auto;
-}
-.apple {
-  font-size: 24px;
-  color: #03F091;
-}
+#logo { height: 38px; width: auto; }
+.apple { font-size: 24px; color: #03F091; }
 
 /* Main */
 main {
@@ -63,9 +58,7 @@ main {
   stroke-dashoffset: 1000;
   animation: draw 2.5s ease forwards;
 }
-@keyframes draw {
-  to { stroke-dashoffset: 0; }
-}
+@keyframes draw { to { stroke-dashoffset: 0; } }
 
 /* Cryptogram */
 .crypto-paragraph {
@@ -73,69 +66,61 @@ main {
   display: flex;
   flex-direction: column;
   gap: 15px;
-  max-width: 900px;  /* Limit total width to prevent long lines */
 }
 
 .crypto-line {
   display: flex;
+  justify-content: flex-start;
   flex-wrap: wrap;
-  justify-content: center;
-  gap: 4px; /* smaller gap to fit more letters */
+  gap: 5px;
+}
+
+.crypto-line .word {
+  display: flex;
+  gap: 5px;
 }
 
 .crypto-line input {
-  width: 28px;      /* smaller input width */
-  height: 32px;     /* smaller input height */
+  width: 32px;
+  height: 38px;
   text-align: center;
   background: transparent;
   border: 2px solid #03F091;
   color: #03F091;
   font-weight: bold;
-  font-size: 16px;
+  font-size: 18px;
   border-radius: 6px;
   outline: none;
-  transition: 0.2s ease;
+  transition: 0.3s ease;
+  animation: neon-glow 2s infinite alternate;
+}
+
+@keyframes neon-glow {
+  0% { box-shadow: 0 0 4px #03F091; color:#03F091; }
+  25% { box-shadow: 0 0 8px #FF00FF; color:#FF00FF; }
+  50% { box-shadow: 0 0 12px #00FFFF; color:#00FFFF; }
+  75% { box-shadow: 0 0 8px #FFAA00; color:#FFAA00; }
+  100% { box-shadow: 0 0 4px #03F091; color:#03F091; }
 }
 
 .crypto-line input.correct {
+  box-shadow: 0 0 12px #00ff99;
   background-color: #03F09133;
-  box-shadow: 0 0 8px #03F091;
 }
 
 .crypto-line input:focus {
   border-color: #00ff99;
-  box-shadow: 0 0 12px #00ff99;
+  box-shadow: 0 0 16px #00ff99;
 }
 
 /* Number below letter */
 .crypto-line .num {
-  font-size: 11px;
+  font-size: 12px;
   color: #00ff99;
   display: block;
-  margin-top: 1px;
+  margin-top: 2px;
   text-align: center;
 }
-
-/* Responsive adjustments */
-@media(max-width: 900px){
-  .crypto-line input {
-    width: 24px;
-    height: 28px;
-    font-size: 14px;
-  }
-  .crypto-paragraph {
-    max-width: 95%; /* fit mobile screens */
-  }
-}
-
-@media(max-width: 500px){
-  .crypto-line input {
-    width: 20px;
-    height: 24px;
-    font-size: 12px;
-  }
-}
-
 
 /* Proceed button */
 #proceed-btn {
