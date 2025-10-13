@@ -73,24 +73,25 @@ main {
   display: flex;
   flex-direction: column;
   gap: 15px;
+  max-width: 900px;  /* Limit total width to prevent long lines */
 }
 
 .crypto-line {
   display: flex;
-  justify-content: center;
-  gap: 5px;
   flex-wrap: wrap;
+  justify-content: center;
+  gap: 4px; /* smaller gap to fit more letters */
 }
 
 .crypto-line input {
-  width: 32px;
-  height: 38px;
+  width: 28px;      /* smaller input width */
+  height: 32px;     /* smaller input height */
   text-align: center;
   background: transparent;
   border: 2px solid #03F091;
   color: #03F091;
   font-weight: bold;
-  font-size: 18px;
+  font-size: 16px;
   border-radius: 6px;
   outline: none;
   transition: 0.2s ease;
@@ -108,12 +109,33 @@ main {
 
 /* Number below letter */
 .crypto-line .num {
-  font-size: 12px;
+  font-size: 11px;
   color: #00ff99;
   display: block;
-  margin-top: 2px;
+  margin-top: 1px;
   text-align: center;
 }
+
+/* Responsive adjustments */
+@media(max-width: 900px){
+  .crypto-line input {
+    width: 24px;
+    height: 28px;
+    font-size: 14px;
+  }
+  .crypto-paragraph {
+    max-width: 95%; /* fit mobile screens */
+  }
+}
+
+@media(max-width: 500px){
+  .crypto-line input {
+    width: 20px;
+    height: 24px;
+    font-size: 12px;
+  }
+}
+
 
 /* Proceed button */
 #proceed-btn {
