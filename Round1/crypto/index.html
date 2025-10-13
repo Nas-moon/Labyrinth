@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Labyrinth – Cryptogram Trial</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<canvas id="particles"></canvas>
+
+<header>
+  <div class="header-left">
+    <img src="laby2.o.svg" alt="logo" id="logo">
+    <h1 class="apple">LABYRINTH</h1>
+  </div>
+</header>
+
+<main>
+  <div class="cryptogram-container">
+    <h2>The Hidden Message</h2>
+
+    <div id="center-logo-container">
+      <!-- Inline animated logo SVG -->
+      <svg id="center-logo" viewBox="0 0 200 200">
+        <!-- Example paths -->
+        <path d="M10 10 L190 10" />
+        <path d="M10 50 L190 50" />
+        <path d="M10 90 L190 90" />
+        <path d="M10 130 L190 130" />
+      </svg>
+    </div>
+
+    <div class="crypto-paragraph">
+      <!-- 4-line cryptogram paragraph -->
+      <div class="crypto-line" data-answer="BENEATH THE GREEN FLAME LIES YOUR KEY."></div>
+      <div class="crypto-line" data-answer="NOT ALL LIGHTS WILL LEAD THE WAY."></div>
+      <div class="crypto-line" data-answer="THE PATH REMEMBERS THOSE WHO SEE."></div>
+      <div class="crypto-line" data-answer="ONLY TRUTH SHALL MAKE YOU STAY."></div>
+    </div>
+
+    <button id="proceed-btn" style="display:none;">🚀 Proceed</button>
+  </div>
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>
