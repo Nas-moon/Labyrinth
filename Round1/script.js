@@ -68,24 +68,15 @@ enterBtn?.addEventListener("click",()=>{
 });
 
 // =======================
-// Memory Timer + Form Reveal
+// Directly show Google Form (no timer)
 // =======================
-if(document.getElementById("timer")){
-  let duration=5*60; // 5 minutes
-  const timerEl=document.getElementById("timer");
-  const imgEl=document.getElementById("memory-img");
-  const formEl=document.getElementById("memory-form");
+const formEl = document.getElementById("memory-form");
+const imgEl = document.getElementById("memory-img");
+const timerEl = document.getElementById("timer");
 
-  const interval=setInterval(()=>{
-    const mins=Math.floor(duration/60).toString().padStart(2,'0');
-    const secs=(duration%60).toString().padStart(2,'0');
-    timerEl.textContent=`Time Left: ${mins}:${secs}`;
-    duration--;
-    if(duration<0){
-      clearInterval(interval);
-      imgEl.style.display="none";
-      formEl.style.display="block";
-      timerEl.textContent="Answer the questions below:";
-    }
-  },1000);
-}
+// Hide unused elements if they exist
+if (imgEl) imgEl.style.display = "none";
+if (timerEl) timerEl.style.display = "none";
+
+// Show the Google Form immediately
+if (formEl) formEl.style.display = "block";
