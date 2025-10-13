@@ -55,18 +55,23 @@ lines.forEach(line => {
       if (!lettersToNumbers[ch]) lettersToNumbers[ch] = currentNumber++;
       const num = lettersToNumbers[ch];
 
+      // Container for input + number
       const container = document.createElement("div");
+      container.classList.add("letter-container"); // new class for styling
       container.style.display = "flex";
       container.style.flexDirection = "column";
       container.style.alignItems = "center";
 
+      // Input field
       const input = document.createElement("input");
       input.setAttribute("maxlength", "1");
       const prefill = Math.random() < 0.15 ? ch : '';
       input.value = prefill;
       input.dataset.letter = ch;
       input.dataset.num = num;
+      input.classList.add("crypto-input");
 
+      // Number below input
       const numEl = document.createElement("span");
       numEl.classList.add("num");
       numEl.textContent = num;
@@ -109,4 +114,16 @@ function checkCrypto() {
 // Pulse animation
 const styleSheet = document.createElement("style");
 styleSheet.innerHTML = `
-@keyfram
+@keyframes pulse {
+  0%{filter: drop-shadow(0 0 4px #03F091);}
+  100%{filter: drop-shadow(0 0 18px #00ff99);}
+}`;
+document.head.appendChild(styleSheet);
+
+// Input events
+document.querySelectorAll(".crypto-line input").forEach(input => {
+  input.addEventListener("input", checkCrypto);
+  input.addEventListener("keydown", e => {
+    if (e.key.length === 1) input.value = '';
+  });
+});
