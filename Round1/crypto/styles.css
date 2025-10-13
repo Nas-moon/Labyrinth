@@ -77,8 +77,10 @@ main {
 
 .crypto-line .word {
   display: flex;
-  gap: 5px;
+  gap: 5px;          /* gap between letters inside word */
+  margin-right: 12px; /* space between words */
 }
+
 
 .crypto-line input {
   width: 32px;
