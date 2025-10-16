@@ -90,6 +90,10 @@ main {
   gap: 6px;
   padding: 0 10px;
   box-sizing: border-box;
+  word-break: keep-all;  /* Prevents breaking inside words */
+  white-space: normal;   /* Allows line breaks between words */
+}
+
 }
 
 /* Input Boxes */
