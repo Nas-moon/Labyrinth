@@ -79,24 +79,25 @@ main {
   display: flex;
   flex-direction: column;
   gap: 18px;
-  width: 100%;
   align-items: center;
+  color: #03F091;
+  font-family: monospace;
 }
 
 .crypto-line {
   display: flex;
-  justify-content: center;
   flex-wrap: wrap;
-  gap: 6px;
-  padding: 0 10px;
-  box-sizing: border-box;
-  word-break: keep-all;  /* Prevents breaking inside words */
-  white-space: normal;   /* Allows line breaks between words */
+  justify-content: center;
+  gap: 12px;
 }
 
+.word {
+  display: inline-flex;    /* keeps all letters of a word together */
+  flex-shrink: 0;          /* prevent breaking */
+  gap: 6px;
+}
 
-/* Input Boxes */
-.crypto-line input {
+.letter-box {
   width: 34px;
   height: 40px;
   text-align: center;
@@ -109,6 +110,18 @@ main {
   outline: none;
   transition: 0.2s ease;
   box-shadow: 0 0 6px rgba(3,240,145,0.3);
+}
+
+.letter-box:focus {
+  border-color: #00ff99;
+  box-shadow: 0 0 12px #00ff99;
+}
+
+@media (max-width: 900px) {
+  .letter-box {
+    width: 28px;
+    height: 34px;
+  }
 }
 
 .crypto-line input.correct {
